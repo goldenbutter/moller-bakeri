@@ -842,6 +842,11 @@ function initGallery() {
     });
     item.setAttribute('role', 'button');
     item.setAttribute('tabindex', '0');
+
+    item.addEventListener('touchstart', () => {
+      items.forEach(other => other !== item && other.classList.remove('active'));
+      item.classList.toggle('active');
+    }, { passive: true });
   });
 
   document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);

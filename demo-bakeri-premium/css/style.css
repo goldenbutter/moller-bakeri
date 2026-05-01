@@ -488,14 +488,13 @@ p { color: var(--color-text); }
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  transition: box-shadow var(--transition), transform var(--transition);
+  transition: box-shadow var(--transition);
   display: flex;
   flex-direction: column;
 }
 
 .bake-card:hover {
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-4px);
 }
 
 .bake-card-image {
@@ -723,10 +722,9 @@ p { color: var(--color-text); }
   overflow: hidden;
   height: 320px;
   cursor: pointer;
-  transition: transform var(--transition);
 }
 
-.category-card:hover { transform: translateY(-4px); }
+.category-card:hover { box-shadow: var(--shadow-card-hover); }
 
 .category-card img {
   width: 100%;
@@ -1401,25 +1399,30 @@ p { color: var(--color-text); }
   width: 100%;
   display: block;
   border-radius: 10px;
-  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: grayscale(100%);
+  transition: filter 0.6s ease, transform 0.5s ease;
 }
 
-.gallery-item:hover img {
+.gallery-item:hover img,
+.gallery-item.active img {
+  filter: grayscale(0%);
   transform: scale(1.04);
-  filter: saturate(1.06);
 }
 
 .gallery-item::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(58, 38, 24, 0);
+  border: 2px solid transparent;
   border-radius: 10px;
-  transition: background 0.3s ease;
+  transition: border-color 0.4s ease;
   pointer-events: none;
 }
 
-.gallery-item:hover::after { background: rgba(58, 38, 24, 0.12); }
+.gallery-item:hover::after,
+.gallery-item.active::after {
+  border-color: var(--color-accent-light);
+}
 
 /* Lightbox */
 .lightbox {
@@ -2072,4 +2075,27 @@ p { color: var(--color-text); }
 .focal-low   { object-position: center 70% !important; }  /* cake on table — push well down       */
 .focal-right { object-position: 65% 40% !important; }     /* hero-bread.jpg — subject on right    */
 .bg-focal-right { background-position: 65% center !important; } /* banner BGs with right subject */
+
+/* === CARD FLOAT ANIMATION ===
+   Cards bob gently and independently — different durations + delays prevent sync.
+   Positive delays let the reveal-in transition finish first (reveal = 0.6s). */
+@keyframes card-float {
+  0%,  100% { transform: translateY(0px); }
+  45%        { transform: translateY(-8px); }
+  72%        { transform: translateY(-3px); }
+}
+
+/* Floating — Dagens bakst */
+.bake-card:nth-child(1) { animation: card-float 4.2s ease-in-out 0.9s infinite; }
+.bake-card:nth-child(2) { animation: card-float 5.1s ease-in-out 1.0s infinite; }
+.bake-card:nth-child(3) { animation: card-float 3.8s ease-in-out 1.1s infinite; }
+
+/* Floating — Vårt utvalg */
+.categories-grid .category-card:nth-child(1) { animation: card-float 4.7s ease-in-out 1.2s infinite; }
+.categories-grid .category-card:nth-child(2) { animation: card-float 5.5s ease-in-out 1.4s infinite; }
+.categories-grid .category-card:nth-child(3) { animation: card-float 4.1s ease-in-out 1.6s infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bake-card, .category-card { animation: none; }
+}
 

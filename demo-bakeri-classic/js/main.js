@@ -644,29 +644,35 @@ function initNav() {
   const mobileMenu = document.getElementById('mobile-menu');
 
   if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
+    // Compact dropdown — no body scroll lock (it doesn't fill the viewport)
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isOpen = mobileMenu.classList.toggle('open');
       hamburger.classList.toggle('open', isOpen);
       hamburger.setAttribute('aria-expanded', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
+    // Close when a nav link is clicked
     mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMenu);
     });
 
-    mobileMenu.addEventListener('click', e => {
-      if (e.target === mobileMenu) {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      }
+    // Close on click outside
+    document.addEventListener('click', e => {
+      if (!mobileMenu.classList.contains('open')) return;
+      if (mobileMenu.contains(e.target) || hamburger.contains(e.target)) return;
+      closeMenu();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
     });
   }
 

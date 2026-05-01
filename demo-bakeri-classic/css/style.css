@@ -1722,7 +1722,7 @@ p { color: var(--color-text); }
 /* Per-image focal-point overrides — applied via class when the default
    50% crop shows too much background for a specific source image.
    Use !important to beat the multi-selector rules above.           */
-.focal-upper { object-position: center 25% !important; }  /* croissant top — pull crop upward     */
+.focal-upper { object-position: center 10% !important; }  /* croissant top — pull crop upward     */
 .focal-lower { object-position: center 55% !important; }  /* bread on shelf — push down slightly  */
 .focal-low   { object-position: center 70% !important; }  /* cake on table — push well down       */
 .focal-right { object-position: 65% 40% !important; }     /* hero-bread.jpg — subject on right    */

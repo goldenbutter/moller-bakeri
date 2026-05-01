@@ -145,6 +145,23 @@
 - **Why:** Review feedback round 2 — premium hamburger menu was too big; user requested a small 320px rounded glass card like the classic dropdown but with the glass effect kept.
 - **How to revert:** `git revert f7bc7a7` restores the full-height side-panel block.
 
+### Commit `be32404` — Reposition hero/gallery crops + remap 11 wrong menu images
+- **Date:** 2026-05-01
+- **Type:** fix(images)
+- **Files touched:** `demo-bakeri-{classic,premium}/css/style.css`, `demo-bakeri-{classic,premium}/{index,menu,gallery}.html` (8 files). `Nano-Banana-prompt.md` updated (gitignored).
+- **What:**
+  - CSS (both tiers): `.hero-bg` mobile background-position `50%→65%` so bread subject (right of centre in hero-bread.jpg) no longer clips on narrow screens.
+  - CSS premium: `.hero-video` mobile `object-position: 65% 50%` override added.
+  - CSS (both tiers): default `object-position` for `.menu-item-image`, `.bake-card-image`, `.category-card img` changed from `center 30%` (face-biased) to `center 50%` (neutral) since most slots now hold food shots, not face photos.
+  - CSS (both tiers): added 4 focal-point utility classes (`.focal-lower`, `.focal-low`, `.focal-right`, `.bg-focal-right`) with `!important` to allow per-image overrides without inline styles.
+  - HTML index.html (both): `cat-sourdough.jpg` category card → `class="focal-lower"` (55%); `cat-cake.jpg` → `class="focal-low"` (70%).
+  - HTML menu.html (both): `cat-sourdough` sour3 → `focal-lower`; `cat-pastry` past2 (mandelcroissant) → `focal-lower`; `cat-cake` cake1 (bløtkake) → `focal-low`. 11 wrong image srcs replaced: sour4→`menu-01-olive-rosemary`, sour5→`menu-02-buckwheat`, sour6→`menu-03-roll`, past3→`menu-04-pain-chocolat`, past4→`menu-05-kanelsnurr`, past6→`menu-06-eplekrans`, cake2→`menu-07-truffle-cake`, cake3→`menu-08-lemon-pistasj`, cake4→`menu-09-bringebær`, cake5→`menu-10-brownie`, cake6→`menu-11-lemon-tart`.
+  - HTML gallery.html (both): gallery item 8 (hero-bread.jpg) → `class="focal-right"` (65% horizontal).
+  - HTML premium gallery.html: page-banner-bg → `class="bg-focal-right"` to shift banner-gallery.jpg left.
+  - Nano-Banana-prompt.md: all 18 existing image headers numbered [01]–[18] + [V01] for video; 11 new prompts [19]–[29] added for the new menu-NN filenames.
+- **Why:** Review round 3 — hero image cropped from right on mobile; multiple menu items showed bakery counters / person portraits / mill machinery instead of the food item; category/menu card focal points were top-biased (30%) causing white background and wall to dominate over bread/cake.
+- **How to revert:** `git revert be32404`. Nano-Banana-prompt.md changes are manual only (gitignored).
+
 ### Future entries
 
 > Template for the next commit log entry — copy and fill in:

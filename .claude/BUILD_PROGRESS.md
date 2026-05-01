@@ -109,6 +109,42 @@
 - **Why:** Spec — premium mobile menu must be 320px liquid-glass, transparent, partial-viewport. Visually distinct from classic.
 - **How to revert:** `git revert 41f83ae`. Or delete the PREMIUM MOBILE MENU block in CSS and restore the original `if (hamburger && mobileMenu)` body in JS.
 
+### Commit `8652231` — Dedupe menu + gallery images (review round 2)
+- **Date:** 2026-05-01
+- **Type:** fix(content)
+- **Files touched:** `demo-bakeri-classic/{menu,gallery}.html`, `demo-bakeri-premium/{menu,gallery}.html`, `.claude/Nano-Banana-prompt.md`, plus 60 image deletions (30 per tier)
+- **What:**
+  - All 18 menu-item `<img>` `src=` attributes in each tier's `menu.html` now reference the 15 unique source filenames directly (no more `menu-sourdough-N.jpg` indirection). 3 wide-banner shots (`banner-menu`, `banner-about`, `banner-gallery`) re-used at most twice each, in non-adjacent items across different sections — no other source appears more than once in the menu.
+  - All 12 gallery-item `<img>` `src=` attributes in each tier's `gallery.html` now reference 12 unique source filenames. `cat-cake.jpg` (the strawberry cake) and `hero-bread.jpg` each appear exactly once where they previously appeared twice.
+  - Deleted 30 orphan rename-copies from each tier's `assets/images/` (`menu-sourdough-1..6.jpg`, `menu-pastry-1..6.jpg`, `menu-cake-1..6.jpg`, `gallery-1..12.jpg`).
+  - `Nano-Banana-prompt.md`: rewrote the "Reuse note" to document the new direct-reference approach.
+- **Why:** Review feedback round 2 — same image was used 3-4× across menu items at different prices, and `cat-cake` plus `hero-bread` each appeared twice in the gallery. User asked for variety.
+- **How to revert:** `git revert 8652231` restores all `menu-*-N.jpg` and `gallery-N.jpg` references AND re-creates the deleted copies (since the commit recorded their deletion).
+
+### Commit `ccb54bc` — Face-friendly cropping on mobile
+- **Date:** 2026-05-01
+- **Type:** fix(css)
+- **Files touched:** `demo-bakeri-classic/css/style.css`, `demo-bakeri-premium/css/style.css`
+- **What:** Both tiers gain a FACE-FRIENDLY CROPPING block at end of style.css:
+  - `.menu-item-image`, `.bake-card-image`, `.category-card img` get `object-position: center 30%` so portraits with people (Anna at the ovens, Selma shaping pastries, Anna+Lars at the counter) keep their faces in the safe area when these containers crop with `object-fit: cover`.
+  - `@media (max-width: 768px)` `.gallery-item img`: `aspect-ratio: 4/5; object-fit: cover; object-position: center 30%`. Forces a uniform portrait-leaning crop on mobile so the masonry doesn't render extreme-tall items in single column. Desktop layout unchanged.
+- **Why:** Review feedback round 2 — faces clipped on the mobile gallery / cards.
+- **How to revert:** `git revert ccb54bc` or delete the FACE-FRIENDLY CROPPING block from each style.css.
+
+### Commit `f7bc7a7` — Premium mobile menu shrunk to floating glass card
+- **Date:** 2026-05-01
+- **Type:** feat(premium)
+- **Files touched:** `demo-bakeri-premium/css/style.css`
+- **What:** The previous 320px-wide full-height side panel (commit `41f83ae`) was too big. Replaced its rule block with a compact floating glass card:
+  - `top: 88px; right: 1rem` — floats 16px below the nav bar, anchored to the right edge with margin
+  - `width: 320px; height: auto` — only as tall as its content (~5 rows + lang toggle)
+  - `border-radius: 18px` (rounded corners), `1px solid rgba(225,190,130,0.4)` warm-gold border, `0 16px 40px` brown shadow
+  - `rgba(251,246,236,0.62)` background with `backdrop-filter: blur(22px) saturate(170%)` (kept glass effect)
+  - opens with `transform: translateY(-8px) scale(0.97) → 0/1` and `opacity 0 → 1`, cubic-bezier spring
+  - lang-toggle + link styling carried over from previous design
+- **Why:** Review feedback round 2 — premium hamburger menu was too big; user requested a small 320px rounded glass card like the classic dropdown but with the glass effect kept.
+- **How to revert:** `git revert f7bc7a7` restores the full-height side-panel block.
+
 ### Future entries
 
 > Template for the next commit log entry — copy and fill in:
@@ -134,11 +170,15 @@
 - **Mobile menu:** 240px right-anchored dropdown card, body-font links, drop shadow. No transform animation
 - **Visitor badge:** **commented out** (premium-only feature)
 - **Vipps modal trigger:** "Forhåndsbestill" buttons on each menu item — still works (modal show/hide is dialog interaction, not page animation)
+- **Menu images:** 18 menu items reference 15 unique source files; only `banner-menu`, `banner-about`, `banner-gallery` reused (max 2× each, non-adjacent)
+- **Gallery images:** 12 unique sources, no repeats (cat-cake/hero-bread each used once)
+- **Mobile face-cropping:** `object-position: center 30%` on fixed-height image cards; gallery items use `aspect-ratio: 4/5` on mobile
 
 ### `demo-bakeri-premium/`
 - Same 5 HTML pages + 3 signature features layered into `index.html`
 - **i18n:** NO/EN toggle **active** (premium feature)
 - **Animations:** classic baseline (kept) + croissant bobs, counter count-up, timeline ring-pulse + progress fill, ambient hero video
-- **Mobile menu:** 320px liquid-glass side panel anchored right, slides in with cubic-bezier spring, backdrop-filter blur, warm-gold accents
+- **Mobile menu:** 320px floating glass card with `border-radius: 18px`, anchored top-right with 1rem margin, 88px from top; `height: auto` (compact, ~5 rows). Opens with translateY+scale spring + fade. Backdrop-filter blur preserved
 - **Visitor badge:** rendered in footer (premium feature)
 - **Hero video:** `assets/videos/hero-bread.mp4` (loaded with JPG poster fallback)
+- **Menu / gallery / mobile-cropping:** same dedupe + face-friendly rules as classic

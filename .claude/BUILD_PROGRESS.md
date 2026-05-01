@@ -162,6 +162,41 @@
 - **Why:** Review round 3 — hero image cropped from right on mobile; multiple menu items showed bakery counters / person portraits / mill machinery instead of the food item; category/menu card focal points were top-biased (30%) causing white background and wall to dominate over bread/cake.
 - **How to revert:** `git revert be32404`. Nano-Banana-prompt.md changes are manual only (gitignored).
 
+### Commits `8937220` — Wire 11 new food images — menu + gallery
+- **Date:** 2026-05-01
+- **Type:** feat(content)
+- **Files touched:** `demo-bakeri-{classic,premium}/menu.html`, `demo-bakeri-{classic,premium}/gallery.html`, 22 new `.jpeg` image assets
+- **What:**
+  - Fixed all 11 new menu image extensions from `.jpg` → `.jpeg` (Nano Banana exports JPEG format)
+  - Added 11 new gallery items (img13–img23) to both gallery pages with Norwegian captions: Olive & Rosmarin Surdeig, Glutenfri Bokhvete, Pølse-rull, Pain au Chocolat, Kanelsnurr, Eplekrans, Sjokolade-trøffelkake, Sitron-pistasjekake, Bringebær-mandelfirkant, Sjokoladebrownie med havsalt, Sitronpai
+  - Committed 22 new `.jpeg` assets to git (11 per tier)
+- **Why:** 11 new food photos (menu-01 through menu-11) generated in Nano Banana by Bithun were placed in both asset folders. HTML referenced `.jpg` but files landed as `.jpeg`. Gallery needed the new shots added.
+- **How to revert:** `git revert 8937220` removes all 22 image files and reverts the 4 HTML files.
+
+### Commit `a2ca9b9` + `94a4a83` — focal-upper class for Smørcroissant
+- **Date:** 2026-05-01
+- **Type:** fix(crop)
+- **Files touched:** `demo-bakeri-{classic,premium}/css/style.css`, `demo-bakeri-{classic,premium}/menu.html`
+- **What:**
+  - Added `.focal-upper { object-position: center 10% !important; }` utility class to both stylesheets
+  - Applied `class="focal-upper"` to `today-croissant.jpg` in both menu.html files
+  - Initial value was `center 25%` (commit `a2ca9b9`), tightened to `center 10%` after screenshot review showed the back croissant crust still clipping (commit `94a4a83`)
+- **Why:** Review round 3 — Smørcroissant image cropped from the top on mobile; back croissant's crust tips were cut off.
+- **How to revert:** `git revert 94a4a83 a2ca9b9` (in that order) or delete `.focal-upper` from both stylesheets and the class from both menu files.
+
+### Commit `d22c853` — Premium gallery grayscale-to-color + floating cards
+- **Date:** 2026-05-01
+- **Type:** feat(premium)
+- **Files touched:** `demo-bakeri-premium/css/style.css`, `demo-bakeri-premium/js/main.js`
+- **What:**
+  - **Gallery (premium only):** All `.gallery-item img` now default to `filter: grayscale(100%)`. On hover/touch they reveal full colour with `filter: grayscale(0%)` + `transform: scale(1.04)`. Touch support via `.active` class toggled by `touchstart` in `initGallery()`. `::after` overlay changes from a dark tint to a `2px solid var(--color-accent-light)` border highlight on hover/active.
+  - **Floating cards (premium only):** `@keyframes card-float` uses pure `translateY` only (no `rotate` — avoids Paint repaints, confirmed by IDE linter hints). `.bake-card:nth-child(1/2/3)` animate at 4.2s / 5.1s / 3.8s with 0.9s / 1.0s / 1.1s positive delays (delays cover the 0.6s reveal transition). `.categories-grid .category-card:nth-child(1/2/3)` animate at 4.7s / 5.5s / 4.1s with 1.2s / 1.4s / 1.6s delays. Staggered durations + start phases prevent cards syncing.
+  - Removed `transform: translateY(-4px)` from `.bake-card:hover` and `.category-card:hover` (animation owns `transform`; kept `box-shadow` lift on hover instead).
+  - Added `@media (prefers-reduced-motion: reduce) { .bake-card, .category-card { animation: none; } }` fallback.
+- **Why:** User request — inspired by fiskeier-demo premium About section (grayscale → color on hover). Floating cards requested as "random alive feel" for the Dagens bakst and Vårt utvalg sections.
+- **Gotcha fixed:** IDE linter warned that `rotate()` inside `@keyframes` triggers Paint (not just Composite). Stripped `rotate()` from all keyframe steps — pure `translateY` is GPU-composited only.
+- **How to revert:** `git revert d22c853`. Restores the old gallery saturate hover, old card hover transform, and removes float animation.
+
 ### Future entries
 
 > Template for the next commit log entry — copy and fill in:
@@ -187,9 +222,10 @@
 - **Mobile menu:** 240px right-anchored dropdown card, body-font links, drop shadow. No transform animation
 - **Visitor badge:** **commented out** (premium-only feature)
 - **Vipps modal trigger:** "Forhåndsbestill" buttons on each menu item — still works (modal show/hide is dialog interaction, not page animation)
-- **Menu images:** 18 menu items reference 15 unique source files; only `banner-menu`, `banner-about`, `banner-gallery` reused (max 2× each, non-adjacent)
-- **Gallery images:** 12 unique sources, no repeats (cat-cake/hero-bread each used once)
-- **Mobile face-cropping:** `object-position: center 30%` on fixed-height image cards; gallery items use `aspect-ratio: 4/5` on mobile
+- **Menu images:** 18 menu items — sour1/2/3 use today-sourdough/hero-bread/cat-sourdough; sour4/5/6 → menu-01-olive-rosemary/menu-02-buckwheat/menu-03-roll (`.jpeg`); past1/2 → today-croissant/cat-pastry; past3/4/5/6 → menu-04-pain-chocolat/menu-05-kanelsnurr/today-cardamom/menu-06-eplekrans (`.jpeg`); cake1 → cat-cake; cake2/3/4/5/6 → menu-07-truffle-cake/menu-08-lemon-pistasj/menu-09-bringebær/menu-10-brownie/menu-11-lemon-tart (`.jpeg`)
+- **Gallery images:** 23 items — img1–12 (original set) + img13–23 (new food shots, all `.jpeg`)
+- **Mobile focal point classes:** `.focal-upper` (10%), `.focal-lower` (55%), `.focal-low` (70%), `.focal-right` (65% x), `.bg-focal-right`; applied per-image in HTML. Default `object-position: center 50%`
+- **LOCKED** — no further changes planned for classic tier
 
 ### `demo-bakeri-premium/`
 - Same 5 HTML pages + 3 signature features layered into `index.html`
@@ -198,4 +234,7 @@
 - **Mobile menu:** 320px floating glass card with `border-radius: 18px`, anchored top-right with 1rem margin, 88px from top; `height: auto` (compact, ~5 rows). Opens with translateY+scale spring + fade. Backdrop-filter blur preserved
 - **Visitor badge:** rendered in footer (premium feature)
 - **Hero video:** `assets/videos/hero-bread.mp4` (loaded with JPG poster fallback)
-- **Menu / gallery / mobile-cropping:** same dedupe + face-friendly rules as classic
+- **Menu / gallery / mobile-cropping:** same image set + focal-point classes as classic
+- **Gallery hover effect:** grayscale(100%) default → grayscale(0%) + scale(1.04) on hover; `.active` class toggles on touch (JS); `::after` border highlight `var(--color-accent-light)` on hover/active
+- **Floating cards:** `.bake-card` (Dagens bakst) and `.categories-grid .category-card` (Vårt utvalg) bob continuously with staggered `card-float` keyframe (pure `translateY`, GPU-composite only). `prefers-reduced-motion` fallback included
+- **LOCKED** — no further changes planned for premium tier

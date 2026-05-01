@@ -10,7 +10,7 @@ A two-tier static website prototype for a fictional Norwegian family bakery in B
 
 ## Tiers
 
-### Classic (~9 999 NOK)
+### Classic
 A clean, fast marketing site with no frills and no framework overhead.
 
 - 5 pages: Home, Menu, About, Gallery, 404
@@ -21,8 +21,8 @@ A clean, fast marketing site with no frills and no framework overhead.
 - Vercel Web Analytics on every page
 - Norwegian only (EN toggle ready to unlock as a paid upgrade)
 
-### Premium (~17 000–19 000 NOK)
-Same baseline plus three signature features that justify the price gap.
+### Premium
+Same baseline plus three signature features.
 
 - **Live bake counter** — animated count-up, time-of-day aware (bread/croissants/cakes)
 - **Sourdough timeline** — 5-step interactive timeline that highlights the current production stage based on the hour

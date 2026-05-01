@@ -1694,3 +1694,28 @@ p { color: var(--color-text); }
   }
 }
 
+/* === FACE-FRIENDLY CROPPING ===
+   Several source images contain people (Anna at the ovens, Selma shaping
+   pastries, Anna+Lars at the counter). When those images land in any
+   fixed-height container with object-fit: cover the default centred
+   crop tends to clip the top of the head. Bias the crop slightly upward
+   (30% from top) so faces stay in the safe area.
+   Gallery on mobile additionally gets a uniform 4:5 aspect ratio so
+   single-column rendering doesn't produce extremely tall portraits.
+   ----------------------------------------------------------------- */
+.menu-item-image,
+.bake-card-image,
+.category-card img {
+  object-position: center 30%;
+}
+
+@media (max-width: 768px) {
+  .gallery-item img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 30%;
+    width: 100%;
+    height: auto;
+  }
+}
+

@@ -2031,3 +2031,24 @@ p { color: var(--color-text); }
   }
 }
 
+/* === FACE-FRIENDLY CROPPING ===
+   See classic style.css for rationale — same logic applied here so
+   mobile views of menu items, home cards, and gallery don't clip
+   faces in source photos.
+   ----------------------------------------------------------------- */
+.menu-item-image,
+.bake-card-image,
+.category-card img {
+  object-position: center 30%;
+}
+
+@media (max-width: 768px) {
+  .gallery-item img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 30%;
+    width: 100%;
+    height: auto;
+  }
+}
+

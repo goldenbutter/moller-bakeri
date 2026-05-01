@@ -1,4 +1,17 @@
+/* CLASSIC: i18n system disabled per spec — Norwegian-only baseline.
+   The HTML carries the Norwegian copy statically, so removing the
+   translation runtime simply leaves the static markup in place.
+   To re-enable for a bilingual upsell:
+     1. Uncomment this block (delete this opening line and the closing line)
+     2. Uncomment the EN toggle <button>s in every HTML <nav> + mobile-menu
+     3. Uncomment the applyTranslations() / initLangToggle() calls in the
+        DOMContentLoaded handler at the bottom of this file.
+   Translation strings below remain authoritative for the Norwegian copy
+   and are also intentionally left intact so an English layer can be
+   bolted on without rewriting them.
+*/
 // === TRANSLATIONS ===
+/*
 const translations = {
   no: {
     // --- Navigation ---
@@ -617,7 +630,7 @@ function initLangToggle() {
   if (btn) btn.addEventListener('click', toggleLanguage);
   if (mobileBtn) mobileBtn.addEventListener('click', toggleLanguage);
 }
-
+*/
 // === NAVIGATION ===
 function initNav() {
   const nav = document.querySelector('.nav');
@@ -794,8 +807,8 @@ function initGallery() {
 
 // === INIT ===
 document.addEventListener('DOMContentLoaded', () => {
-  applyTranslations();
-  initLangToggle();
+  // applyTranslations();   // disabled — see i18n block at top of file
+  // initLangToggle();      // disabled — see i18n block at top of file
   initNav();
   initScrollAnimations();
   initVippsModal();

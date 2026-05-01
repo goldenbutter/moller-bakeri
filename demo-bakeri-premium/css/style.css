@@ -1966,64 +1966,74 @@ p { color: var(--color-text); }
   .croissant-divider { height: 64px; }
 }
 
-/* === PREMIUM MOBILE MENU — 320px liquid-glass side panel ===
-   Spec: small (320px), liquid-glass / transparent, does NOT cover the
-   whole viewport. Slides in from the right under the nav bar. Page
-   content stays visible (and partly blurred through the panel) behind.
+/* === PREMIUM MOBILE MENU — 320px floating glass card ===
+   Spec (review round 2): small like the classic dropdown — 320px wide,
+   rounded corners, glass effect. Floats below the nav bar with margin
+   on the right; auto-height (only as tall as its content). Page is
+   visible behind with a soft blur through the card.
    Closes on outside click / Esc / link click.
-   Sits at the END of the file so it overrides the inherited mobile-menu
-   rules from the template.
    ----------------------------------------------------------------- */
 @media (max-width: 768px) {
   .mobile-menu {
-    display: flex !important;        /* always mounted, off-screen by default */
+    display: flex !important;
     position: fixed !important;
-    inset: 72px 0 0 auto !important;
-    top: 72px !important;
-    right: 0 !important;
+    top: 88px !important;            /* 72px nav + 16px gap */
+    right: 1rem !important;
     left: auto !important;
-    bottom: 0 !important;
+    bottom: auto !important;
+    inset: 88px 1rem auto auto !important;
     width: 320px !important;
-    max-width: 86vw !important;
-    height: calc(100vh - 72px) !important;
-    transform: translateX(100%);
-    transition: transform 0.42s cubic-bezier(0.32, 0.72, 0.16, 1) !important;
-    background: rgba(251, 246, 236, 0.55) !important;
-    -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
-    backdrop-filter: blur(24px) saturate(160%) !important;
-    border-left: 1px solid rgba(225, 190, 130, 0.35) !important;
-    box-shadow: -12px 0 40px rgba(58, 38, 24, 0.12) !important;
+    max-width: calc(100vw - 2rem) !important;
+    height: auto !important;
+    background: rgba(251, 246, 236, 0.62) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(170%) !important;
+    backdrop-filter: blur(22px) saturate(170%) !important;
+    border: 1px solid rgba(225, 190, 130, 0.4) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 16px 40px rgba(58, 38, 24, 0.18) !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
     align-items: stretch !important;
     gap: 0 !important;
-    padding: 1.5rem 0 1rem !important;
+    padding: 0.5rem 0 0.75rem !important;
+    overflow: hidden !important;     /* keeps row dividers inside the rounded edge */
     z-index: 1001 !important;
+    transform: translateY(-8px) scale(0.97) !important;
+    transform-origin: top right !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transition: transform 0.32s cubic-bezier(0.32, 0.72, 0.16, 1),
+                opacity 0.22s ease !important;
   }
   .mobile-menu.open {
-    transform: translateX(0) !important;
+    transform: translateY(0) scale(1) !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
   }
   .mobile-menu a {
     font-family: var(--font-body) !important;
-    font-size: 1.05rem !important;
+    font-size: 1rem !important;
     font-weight: 500 !important;
     color: var(--color-text) !important;
-    padding: 0.95rem 1.75rem !important;
-    border-bottom: 1px solid rgba(225, 190, 130, 0.25) !important;
+    padding: 0.85rem 1.4rem !important;
+    border-bottom: 1px solid rgba(225, 190, 130, 0.22) !important;
     text-align: left !important;
     transition: background 0.18s ease, color 0.18s ease !important;
   }
+  .mobile-menu a:last-of-type {
+    border-bottom: none !important;
+  }
   .mobile-menu a:hover {
-    background: rgba(255, 255, 255, 0.5) !important;
+    background: rgba(255, 255, 255, 0.55) !important;
     color: var(--color-primary) !important;
   }
   .mobile-menu .lang-toggle {
-    margin: 1rem 1.75rem 0 !important;
+    margin: 0.6rem 1.4rem 0.2rem !important;
     align-self: flex-start !important;
     font-size: 0.78rem !important;
     padding: 0.4rem 0.9rem !important;
     background: rgba(255, 255, 255, 0.5) !important;
-    border-color: rgba(225, 190, 130, 0.4) !important;
+    border-color: rgba(225, 190, 130, 0.45) !important;
   }
   .mobile-menu .lang-toggle:hover {
     background: rgba(255, 255, 255, 0.75) !important;

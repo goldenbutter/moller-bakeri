@@ -807,13 +807,13 @@ function initGallery() {
 
 // === INIT ===
 document.addEventListener('DOMContentLoaded', () => {
-  // applyTranslations();   // disabled — see i18n block at top of file
-  // initLangToggle();      // disabled — see i18n block at top of file
+  // applyTranslations();    // disabled — see i18n block at top of file
+  // initLangToggle();       // disabled — see i18n block at top of file
   initNav();
-  initScrollAnimations();
+  // initScrollAnimations(); // disabled — classic is static (CSS override forces .reveal visible)
   initVippsModal();
   initFaq();
   initGallery();
 
-  document.querySelector('main')?.classList.add('page-fade');
+  // document.querySelector('main')?.classList.add('page-fade'); // disabled — no page fade in classic
 });

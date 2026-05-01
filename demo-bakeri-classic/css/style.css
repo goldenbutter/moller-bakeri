@@ -1577,3 +1577,69 @@ p { color: var(--color-text); }
   .gallery-grid { columns: 1; }
   .nav-inner { padding: 0 1.25rem; }
 }
+
+/* === CLASSIC STATIC OVERRIDE ===
+   Per spec: classic ships as a fully static site — no transitions,
+   animations, or hover transforms. The animation rules above stay
+   intact so:
+     1. premium can keep its richer interactions
+     2. removing this override block alone re-enables motion (paid upsell)
+   ----------------------------------------------------------------- */
+
+*, *::before, *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Reveal-on-scroll: show immediately, no fade-up */
+.reveal,
+.reveal-stagger > * {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Page-fade-on-load */
+.page-fade { animation: none !important; }
+
+/* Disable all hover lifts and scale-ups */
+.bake-card:hover,
+.menu-item:hover,
+.category-card:hover,
+.photo-grid-item:hover,
+.btn:hover,
+.btn-accent:hover,
+.btn-primary:hover,
+.btn-outline:hover,
+.story-home-image:hover {
+  transform: none !important;
+}
+
+.category-card:hover img,
+.photo-grid-item:hover img,
+.gallery-item:hover img {
+  transform: none !important;
+  filter: saturate(0.95) contrast(1.02) !important;
+}
+
+/* Cards keep their base shadow on hover instead of intensifying */
+.bake-card:hover,
+.menu-item:hover,
+.category-card:hover {
+  box-shadow: var(--shadow-card) !important;
+}
+
+.btn-accent:hover,
+.btn-primary:hover,
+.btn-outline:hover {
+  box-shadow: none !important;
+}
+
+/* text-link arrow gap stays fixed */
+.text-link:hover { gap: 0.3rem !important; }
+
+/* Gallery overlay does not darken on hover */
+.gallery-item:hover::after { background: rgba(58, 38, 24, 0) !important; }
+
+/* Nav scroll-shadow off */
+.nav.scrolled { box-shadow: none !important; }
+

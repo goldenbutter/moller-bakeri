@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Møller Bakeri — Om oss</title>
+  <meta name="description" content="Tre generasjoner i Skostredet, Bergen. Møt familien Møller bak benken — Anna, Lars og Selma." />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Hovednavigasjon">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="26" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 5 L16 28" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="13" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 10)"/>
+          <ellipse cx="19" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 10)"/>
+          <ellipse cx="12" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 12 15)"/>
+          <ellipse cx="20" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 20 15)"/>
+          <ellipse cx="13" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 20)"/>
+          <ellipse cx="19" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 20)"/>
+        </svg>
+        <span data-i18n="nav.logo">Møller Bakeri</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+        <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+        <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+        <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Bytt språk">EN</button>
+        <button type="button" class="hamburger" id="hamburger" aria-label="Åpne meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigasjonsmeny">
+    <a href="index.html"   data-i18n="nav.home">Hjem</a>
+    <a href="menu.html"    data-i18n="nav.menu">Meny</a>
+    <a href="about.html"   data-i18n="nav.about">Om oss</a>
+    <a href="gallery.html" data-i18n="nav.gallery">Galleri</a>
+    <button type="button" class="lang-toggle" id="mobile-lang-toggle">EN</button>
+  </div>
+
+  <main>
+
+    <section class="page-banner" aria-label="Topbilde">
+      <div class="page-banner-bg" style="background-image: url('assets/images/banner-about.jpg');"></div>
+      <div class="page-banner-overlay"></div>
+      <div class="page-banner-content">
+        <h1 data-i18n="about.banner.title">Om Møller Bakeri</h1>
+        <p data-i18n="about.banner.sub">Tre generasjoner i Skostredet</p>
+      </div>
+    </section>
+
+    <!-- === STORY === -->
+    <section class="story-section">
+      <div class="story-inner reveal">
+        <h2 data-i18n="about.story.heading">Familien Møller og bakeriet</h2>
+        <div class="story-text">
+          <p data-i18n="about.story.p1">I 1962 flyttet Knut Møller fra Voss til Bergen med en gammel steinmølle og en surdeigsstarter han hadde holdt i live siden krigen.</p>
+          <p data-i18n="about.story.p2">I dag, 63 år senere, mater vi fortsatt den samme surdeigsstarteren hver kveld. Anna styrer ovnene, Lars tar seg av lamineringen, og Selma er lærling.</p>
+          <p data-i18n="about.story.p3">Vi er ikke det største bakeriet i Bergen. Men vi er kanskje det eneste der bestefars surdeig fortsatt jobber.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- === PHOTO GRID === -->
+    <section class="photo-grid-section">
+      <div class="photo-grid-inner">
+        <div class="photo-grid reveal-stagger">
+          <figure class="photo-grid-item large reveal">
+            <img src="assets/images/about-photo-1.jpg" alt="" data-i18n="photo.img1.alt" loading="lazy" />
+          </figure>
+          <figure class="photo-grid-item small-top reveal">
+            <img src="assets/images/about-photo-2.jpg" alt="" data-i18n="photo.img2.alt" loading="lazy" />
+          </figure>
+          <figure class="photo-grid-item small-bottom reveal">
+            <img src="assets/images/about-photo-3.jpg" alt="" data-i18n="photo.img3.alt" loading="lazy" />
+          </figure>
+          <figure class="photo-grid-item wide reveal">
+            <img src="assets/images/about-photo-4.jpg" alt="" data-i18n="photo.img4.alt" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- === BAKERS === -->
+    <section class="bakers-section">
+      <div class="bakers-inner">
+        <div class="section-heading center reveal">
+          <span class="section-label" data-i18n="bakers.label">Tre generasjoner</span>
+          <h2 data-i18n="bakers.heading">Møt familien bak benken</h2>
+        </div>
+
+        <div class="bakers-grid reveal-stagger">
+          <div class="baker-card reveal">
+            <img class="baker-photo" src="assets/images/baker-anna.jpg" alt="" data-i18n="baker1.name" loading="lazy" />
+            <h3 data-i18n="baker1.name">Anna Møller</h3>
+            <div class="baker-role" data-i18n="baker1.role">Sjefsbaker</div>
+            <p data-i18n="baker1.bio">Anna har stått ved ovnene siden hun var 14. Hun lærte av faren Knut.</p>
+          </div>
+          <div class="baker-card reveal">
+            <img class="baker-photo" src="assets/images/baker-lars.jpg" alt="" data-i18n="baker2.name" loading="lazy" />
+            <h3 data-i18n="baker2.name">Lars Møller</h3>
+            <div class="baker-role" data-i18n="baker2.role">Bakverk & laminering</div>
+            <p data-i18n="baker2.bio">Lars lærte laminering på Boulangerie Poilâne i Paris.</p>
+          </div>
+          <div class="baker-card reveal">
+            <img class="baker-photo" src="assets/images/baker-selma.jpg" alt="" data-i18n="baker3.name" loading="lazy" />
+            <h3 data-i18n="baker3.name">Selma Møller</h3>
+            <div class="baker-role" data-i18n="baker3.role">Lærling</div>
+            <p data-i18n="baker3.bio">Selma er Knuts barnebarn og lærling i tredje generasjon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === VALUES === -->
+    <section class="values-section">
+      <div class="values-inner">
+        <div class="section-heading center reveal">
+          <span class="section-label" data-i18n="values.label">Hva vi tror på</span>
+          <h2 data-i18n="values.heading">Tre prinsipper, hver dag</h2>
+        </div>
+
+        <div class="values-grid reveal-stagger">
+          <div class="value-block reveal">
+            <svg class="value-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="24" cy="24" r="20"/>
+              <polyline points="24 12 24 24 32 30"/>
+            </svg>
+            <h3 data-i18n="val1.title">Tid, ikke snarveier</h3>
+            <p data-i18n="val1.text">36 timers heving for surdeig. Tre dagers laminering. Ingen hurtigfrysermaskin.</p>
+          </div>
+          <div class="value-block reveal">
+            <svg class="value-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M16 8 L16 40" stroke-linecap="round"/>
+              <ellipse cx="13" cy="14" rx="3" ry="4.5" fill="currentColor" transform="rotate(-28 13 14)" opacity="0.7"/>
+              <ellipse cx="19" cy="14" rx="3" ry="4.5" fill="currentColor" transform="rotate(28 19 14)" opacity="0.7"/>
+              <ellipse cx="12" cy="22" rx="3" ry="4.5" fill="currentColor" transform="rotate(-28 12 22)" opacity="0.7"/>
+              <ellipse cx="20" cy="22" rx="3" ry="4.5" fill="currentColor" transform="rotate(28 20 22)" opacity="0.7"/>
+              <ellipse cx="13" cy="30" rx="3" ry="4.5" fill="currentColor" transform="rotate(-28 13 30)" opacity="0.7"/>
+              <ellipse cx="19" cy="30" rx="3" ry="4.5" fill="currentColor" transform="rotate(28 19 30)" opacity="0.7"/>
+            </svg>
+            <h3 data-i18n="val2.title">Norske råvarer</h3>
+            <p data-i18n="val2.text">Stenmalt mel fra Holli Mølle, smør fra Røros, frukt fra Hardanger.</p>
+          </div>
+          <div class="value-block reveal">
+            <svg class="value-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="24" cy="18" r="6"/>
+              <path d="M10 42 c0-8 6-14 14-14 s14 6 14 14"/>
+            </svg>
+            <h3 data-i18n="val3.title">Et menneske per disk</h3>
+            <p data-i18n="val3.text">Du møter alltid en av oss tre — aldri en kortsiktig innleid. Vi husker navnene deres.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3 data-i18n="nav.logo">Møller Bakeri</h3>
+        <p data-i18n="footer.tagline">Surdeigsbrød og bakverk siden 1962.</p>
+        <address class="footer-address" data-i18n="footer.address">Skostredet 12, 5017 Bergen</address>
+      </div>
+      <nav class="footer-links" aria-label="Sidelenker">
+        <h4 data-i18n="footer.links">Sider</h4>
+        <ul>
+          <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+          <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+          <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+        </ul>
+      </nav>
+      <div class="footer-contact">
+        <h4 data-i18n="footer.contact">Kontakt</h4>
+        <p><a href="tel:+4755314762" data-i18n="footer.phone">+47 55 31 47 62</a></p>
+        <p><a href="mailto:post@mollerbakeri.no" data-i18n="footer.email">post@mollerbakeri.no</a></p>
+        <p class="response-note" data-i18n="footer.response">Vi svarer vanligvis innen 24 timer</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copyright">© 2026 Møller Bakeri</span>
+      <a href="#" data-i18n="footer.dev">Utviklet av Bithun</a>
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=demo-bakeri-premium.ibithun.com&left_color=%23333333&right_color=%23B8842B&left_text=Views" alt="Sidevisninger" />
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="vipps-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <div class="modal-vipps-logo" aria-label="Vipps">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="10" fill="white" opacity="0.25"/>
+          <text x="10" y="14" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif" font-weight="bold">V</text>
+        </svg>
+        Vipps
+      </div>
+      <h2 id="modal-title" data-i18n="modal.title">Dette er en demo</h2>
+      <p data-i18n="modal.body1">Dette er en demo — Vipps-betaling aktiveres når din konto er satt opp.</p>
+      <p>
+        <span data-i18n="modal.body2">Kontakt oss for å se hvordan dette fungerer for ditt bakeri:</span>
+        <a href="mailto:post@bakeridemo.no" data-i18n="modal.email">post@bakeridemo.no</a>
+      </p>
+      <button type="button" class="modal-close-btn" data-i18n="modal.close">Lukk</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Møller Bakeri — Surdeigsbrød og bakverk i Bergen</title>
+  <meta name="description" content="Familiebakeri i Skostredet, Bergen siden 1962. Surdeigsbrød med 36 timers heving, croissanter med tre dagers laminering, og bestillingskaker." />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Møller Bakeri — Surdeigsbrød og bakverk i Bergen" />
+  <meta property="og:description" content="Familiebakeri i Skostredet, Bergen siden 1962." />
+  <meta property="og:image"       content="https://demo-bakeri-classic.vercel.app/assets/images/hero-bread.jpg" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- === NAVIGATION === -->
+  <nav class="nav" role="navigation" aria-label="Hovednavigasjon">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="26" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 5 L16 28" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="13" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 10)"/>
+          <ellipse cx="19" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 10)"/>
+          <ellipse cx="12" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 12 15)"/>
+          <ellipse cx="20" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 20 15)"/>
+          <ellipse cx="13" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 20)"/>
+          <ellipse cx="19" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 20)"/>
+        </svg>
+        <span data-i18n="nav.logo">Møller Bakeri</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+        <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+        <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+        <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Bytt språk">EN</button>
+        <button type="button" class="hamburger" id="hamburger" aria-label="Åpne meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigasjonsmeny">
+    <a href="index.html"   data-i18n="nav.home">Hjem</a>
+    <a href="menu.html"    data-i18n="nav.menu">Meny</a>
+    <a href="about.html"   data-i18n="nav.about">Om oss</a>
+    <a href="gallery.html" data-i18n="nav.gallery">Galleri</a>
+    <button type="button" class="lang-toggle" id="mobile-lang-toggle">EN</button>
+  </div>
+
+  <main>
+
+    <!-- === HERO === -->
+    <section class="hero" aria-label="Velkomstbilde">
+      <div class="hero-bg" style="background-image: url('assets/images/hero-bread.jpg');" role="img">
+        <img data-i18n="hero.img.alt" src="" alt="" style="display:none;" />
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-eyebrow" data-i18n="hero.eyebrow">Familiebakeri i Bergen siden 1962</span>
+        <h1 data-i18n="hero.headline">Surdeigsbrød og bakverk, <em>bakt med tid</em></h1>
+        <p data-i18n="hero.sub">Tre generasjoner i samme bakeri. Lange hevinger, ekte smør, og en duft som vekker hele Marken hver morgen.</p>
+        <a href="menu.html" class="btn btn-accent" data-i18n="hero.cta">Se dagens bakst</a>
+      </div>
+    </section>
+
+    <!-- === TODAY'S BAKE === -->
+    <section class="todays-bake">
+      <div class="todays-bake-inner">
+        <div class="todays-bake-heading reveal">
+          <span class="section-label" data-i18n="today.label">I ovnen i dag</span>
+          <h2 data-i18n="today.heading">Dagens bakst</h2>
+        </div>
+
+        <div class="todays-grid reveal-stagger">
+          <article class="bake-card reveal">
+            <img class="bake-card-image" src="assets/images/today-sourdough.jpg" alt="" data-i18n="today1.title" loading="lazy" />
+            <div class="bake-card-body">
+              <span class="bake-card-tag" data-i18n="today1.tag">Surdeig</span>
+              <h3 data-i18n="today1.title">Bergensk Surdeig</h3>
+              <p data-i18n="today1.text">Vårt klassiske surdeigsbrød — 36 timers heving, sprø skorpe, åpen krumme.</p>
+              <div class="bake-card-footer">
+                <span class="bake-card-price"><span data-i18n="today1.price">78</span><small data-i18n="today.kr">kr</small></span>
+                <a href="menu.html" class="text-link" data-i18n="cat1.link">Se brødene <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="bake-card reveal">
+            <img class="bake-card-image" src="assets/images/today-croissant.jpg" alt="" data-i18n="today2.title" loading="lazy" />
+            <div class="bake-card-body">
+              <span class="bake-card-tag" data-i18n="today2.tag">Bakverk</span>
+              <h3 data-i18n="today2.title">Smørcroissant</h3>
+              <p data-i18n="today2.text">Tre dagers laminering med fransk Bordier-smør. Sprø, flassende.</p>
+              <div class="bake-card-footer">
+                <span class="bake-card-price"><span data-i18n="today2.price">42</span><small data-i18n="today.kr">kr</small></span>
+                <a href="menu.html" class="text-link" data-i18n="cat2.link">Se bakverk <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="bake-card reveal">
+            <img class="bake-card-image" src="assets/images/today-cardamom.jpg" alt="" data-i18n="today3.title" loading="lazy" />
+            <div class="bake-card-body">
+              <span class="bake-card-tag" data-i18n="today3.tag">Kake</span>
+              <h3 data-i18n="today3.title">Kardemommesnurr</h3>
+              <p data-i18n="today3.text">Mors oppskrift fra 1962. Knust pistasj, glasur, kun torsdager.</p>
+              <div class="bake-card-footer">
+                <span class="bake-card-price"><span data-i18n="today3.price">38</span><small data-i18n="today.kr">kr</small></span>
+                <a href="menu.html" class="text-link" data-i18n="cat3.link">Se kaker <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flour-dust divider -->
+    <div class="flour-divider on-alt" aria-hidden="true">
+      <svg class="divider-icon" viewBox="0 0 32 32" fill="none">
+        <path d="M16 5 L16 28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <ellipse cx="13" cy="10" rx="2" ry="3" fill="currentColor" transform="rotate(-28 13 10)"/>
+        <ellipse cx="19" cy="10" rx="2" ry="3" fill="currentColor" transform="rotate(28 19 10)"/>
+        <ellipse cx="12" cy="15" rx="2" ry="3" fill="currentColor" transform="rotate(-28 12 15)"/>
+        <ellipse cx="20" cy="15" rx="2" ry="3" fill="currentColor" transform="rotate(28 20 15)"/>
+        <ellipse cx="13" cy="20" rx="2" ry="3" fill="currentColor" transform="rotate(-28 13 20)"/>
+        <ellipse cx="19" cy="20" rx="2" ry="3" fill="currentColor" transform="rotate(28 19 20)"/>
+      </svg>
+    </div>
+
+    <!-- === STORY === -->
+    <section class="story-home">
+      <div class="story-home-inner">
+        <div class="story-home-text reveal">
+          <span class="section-label" data-i18n="story.label">Vår historie</span>
+          <h2 data-i18n="story.heading">Et bakeri på Marken — siden bestefar Knut åpnet døren</h2>
+          <p data-i18n="story.p1">Møller Bakeri har stått i Skostredet siden 1962, da bestefar Knut Møller flyttet fra Voss til Bergen med en steinmølle, en surdeigsstarter, og en idé om at brød skulle ta tid.</p>
+          <p data-i18n="story.p2">I dag driver Anna og Lars videre, med Knuts barnebarn Selma som lærling. Vi maler fortsatt en del av kornet selv og baker hver natt for å ha ferskt klart kl. 07.</p>
+          <p data-i18n="story.p3">Kom inn for kaffe og en croissant — vi spør gjerne hvordan dagen din går.</p>
+          <p class="story-signoff" data-i18n="story.signoff">– Familien Møller</p>
+        </div>
+
+        <div class="story-home-image reveal" style="transition-delay: 0.15s;">
+          <img
+            src="assets/images/story-counter.jpg"
+            data-i18n="story.img.alt"
+            alt="Anna Møller og Lars Møller bak disken i bakeriet"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Flour-dust divider into deep -->
+    <div class="flour-divider on-deep" aria-hidden="true">
+      <svg class="divider-icon" viewBox="0 0 32 32" fill="none">
+        <path d="M16 5 L16 28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <ellipse cx="13" cy="10" rx="2" ry="3" fill="currentColor" transform="rotate(-28 13 10)"/>
+        <ellipse cx="19" cy="10" rx="2" ry="3" fill="currentColor" transform="rotate(28 19 10)"/>
+        <ellipse cx="12" cy="15" rx="2" ry="3" fill="currentColor" transform="rotate(-28 12 15)"/>
+        <ellipse cx="20" cy="15" rx="2" ry="3" fill="currentColor" transform="rotate(28 20 15)"/>
+        <ellipse cx="13" cy="20" rx="2" ry="3" fill="currentColor" transform="rotate(-28 13 20)"/>
+        <ellipse cx="19" cy="20" rx="2" ry="3" fill="currentColor" transform="rotate(28 19 20)"/>
+      </svg>
+    </div>
+
+    <!-- === HOURS STRIP === -->
+    <div class="hours-strip" role="region" aria-label="Åpningstider og adresse">
+      <div class="hours-strip-inner">
+        <div class="hours-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span><strong data-i18n="hours.weekday">Tirsdag–fredag</strong> · <span data-i18n="hours.weekday.value">07:00 – 17:00</span></span>
+        </div>
+        <div class="hours-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <span><strong data-i18n="hours.weekend">Lørdag</strong> · <span data-i18n="hours.weekend.value">08:00 – 15:00</span></span>
+        </div>
+        <div class="hours-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span data-i18n="hours.location">Skostredet 12, 5017 Bergen</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flour-dust divider out of deep -->
+    <div class="flour-divider on-deep" aria-hidden="true" style="background: var(--color-bg);">
+      <svg class="divider-icon" viewBox="0 0 32 32" fill="none" style="color: var(--color-primary);">
+        <path d="M16 5 L16 28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <ellipse cx="13" cy="10" rx="2" ry="3" fill="currentColor" transform="rotate(-28 13 10)"/>
+        <ellipse cx="19" cy="10" rx="2" ry="3" fill="currentColor" transform="rotate(28 19 10)"/>
+        <ellipse cx="12" cy="15" rx="2" ry="3" fill="currentColor" transform="rotate(-28 12 15)"/>
+        <ellipse cx="20" cy="15" rx="2" ry="3" fill="currentColor" transform="rotate(28 20 15)"/>
+        <ellipse cx="13" cy="20" rx="2" ry="3" fill="currentColor" transform="rotate(-28 13 20)"/>
+        <ellipse cx="19" cy="20" rx="2" ry="3" fill="currentColor" transform="rotate(28 19 20)"/>
+      </svg>
+    </div>
+
+    <!-- === CATEGORIES PREVIEW === -->
+    <section class="categories">
+      <div class="categories-inner">
+        <div class="categories-heading reveal">
+          <span class="section-label" data-i18n="cat.label">Vårt utvalg</span>
+          <h2 data-i18n="cat.heading">Tre håndverk under samme tak</h2>
+        </div>
+
+        <div class="categories-grid reveal-stagger">
+          <a href="menu.html" class="category-card reveal">
+            <img src="assets/images/cat-sourdough.jpg" alt="" data-i18n="cat1.title" loading="lazy" />
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <h3 data-i18n="cat1.title">Surdeigsbrød</h3>
+              <p data-i18n="cat1.text">Lange hevinger med vill surdeig. 8 sorter, daglig bakst.</p>
+              <span class="category-card-link" data-i18n="cat1.link">Se brødene →</span>
+            </div>
+          </a>
+
+          <a href="menu.html" class="category-card reveal">
+            <img src="assets/images/cat-pastry.jpg" alt="" data-i18n="cat2.title" loading="lazy" />
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <h3 data-i18n="cat2.title">Bakverk</h3>
+              <p data-i18n="cat2.text">Croissanter, snurrer og wienerbrød — alt fra bunnen.</p>
+              <span class="category-card-link" data-i18n="cat2.link">Se bakverk →</span>
+            </div>
+          </a>
+
+          <a href="menu.html" class="category-card reveal">
+            <img src="assets/images/cat-cake.jpg" alt="" data-i18n="cat3.title" loading="lazy" />
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <h3 data-i18n="cat3.title">Kaker</h3>
+              <p data-i18n="cat3.text">Bestillingskaker, sesongkaker og daglige fristelser.</p>
+              <span class="category-card-link" data-i18n="cat3.link">Se kaker →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- === TESTIMONIAL === -->
+    <section class="testimonial" aria-label="Kundeanmeldelse">
+      <div class="testimonial-bg-quote" aria-hidden="true">&ldquo;</div>
+      <div class="testimonial-inner reveal">
+        <blockquote>
+          <p class="testimonial-quote" data-i18n="testimonial.quote">"Jeg bestiller bryllupskakene mine her, men også bare et brød på vei hjem fra jobb."</p>
+          <footer class="testimonial-author" data-i18n="testimonial.author">— Ingrid B., fast kunde i 14 år</footer>
+        </blockquote>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- === FOOTER === -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3 data-i18n="nav.logo">Møller Bakeri</h3>
+        <p data-i18n="footer.tagline">Surdeigsbrød og bakverk siden 1962. Bakt for hånd, daglig.</p>
+        <address class="footer-address" data-i18n="footer.address">Skostredet 12, 5017 Bergen</address>
+      </div>
+
+      <nav class="footer-links" aria-label="Sidelenker">
+        <h4 data-i18n="footer.links">Sider</h4>
+        <ul>
+          <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+          <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+          <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-contact">
+        <h4 data-i18n="footer.contact">Kontakt</h4>
+        <p><a href="tel:+4755314762" data-i18n="footer.phone">+47 55 31 47 62</a></p>
+        <p><a href="mailto:post@mollerbakeri.no" data-i18n="footer.email">post@mollerbakeri.no</a></p>
+        <p class="response-note" data-i18n="footer.response">Vi svarer vanligvis innen 24 timer</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="footer.copyright">© 2026 Møller Bakeri</span>
+      <a href="#" data-i18n="footer.dev">Utviklet av Bithun</a>
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=demo-bakeri-classic.ibithun.com&left_color=%23333333&right_color=%23B8842B&left_text=Views" alt="Sidevisninger" />
+    </div>
+  </footer>
+
+  <!-- === VIPPS MODAL === -->
+  <div class="modal-backdrop" id="vipps-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <div class="modal-vipps-logo" aria-label="Vipps">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="10" fill="white" opacity="0.25"/>
+          <text x="10" y="14" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif" font-weight="bold">V</text>
+        </svg>
+        Vipps
+      </div>
+      <h2 id="modal-title" data-i18n="modal.title">Dette er en demo</h2>
+      <p data-i18n="modal.body1">Dette er en demo — Vipps-betaling aktiveres når din konto er satt opp.</p>
+      <p>
+        <span data-i18n="modal.body2">Kontakt oss for å se hvordan dette fungerer for ditt bakeri:</span>
+        <a href="mailto:post@bakeridemo.no" data-i18n="modal.email">post@bakeridemo.no</a>
+      </p>
+      <button type="button" class="modal-close-btn" data-i18n="modal.close">Lukk</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

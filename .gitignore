@@ -1,0 +1,8 @@
+CLAUDE.md
+.claude/*
+!.claude/BUILD_PROGRESS.md
+screenshot/
+*.zip
+.env*
+node_modules/
+.DS_Store

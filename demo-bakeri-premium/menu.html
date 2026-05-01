@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Møller Bakeri — Meny</title>
+  <meta name="description" content="Surdeigsbrød, bakverk og kaker fra Møller Bakeri. Daglig bakst i Skostredet, Bergen." />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Hovednavigasjon">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="26" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 5 L16 28" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="13" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 10)"/>
+          <ellipse cx="19" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 10)"/>
+          <ellipse cx="12" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 12 15)"/>
+          <ellipse cx="20" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 20 15)"/>
+          <ellipse cx="13" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 20)"/>
+          <ellipse cx="19" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 20)"/>
+        </svg>
+        <span data-i18n="nav.logo">Møller Bakeri</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+        <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+        <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+        <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Bytt språk">EN</button>
+        <button type="button" class="hamburger" id="hamburger" aria-label="Åpne meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigasjonsmeny">
+    <a href="index.html"   data-i18n="nav.home">Hjem</a>
+    <a href="menu.html"    data-i18n="nav.menu">Meny</a>
+    <a href="about.html"   data-i18n="nav.about">Om oss</a>
+    <a href="gallery.html" data-i18n="nav.gallery">Galleri</a>
+    <button type="button" class="lang-toggle" id="mobile-lang-toggle">EN</button>
+  </div>
+
+  <main>
+
+    <section class="page-banner" aria-label="Topbilde">
+      <div class="page-banner-bg" style="background-image: url('assets/images/banner-menu.jpg');"></div>
+      <div class="page-banner-overlay"></div>
+      <div class="page-banner-content">
+        <h1 data-i18n="menu.banner.title">Meny</h1>
+        <p data-i18n="menu.banner.sub">Daglig bakst i Skostredet — surdeig, bakverk og kaker.</p>
+      </div>
+    </section>
+
+    <!-- === SOURDOUGH === -->
+    <section class="menu-section">
+      <div class="menu-section-inner">
+        <div class="section-heading reveal">
+          <span class="section-label" data-i18n="menu.sour.label">Surdeig</span>
+          <h2 data-i18n="menu.sour.heading">Surdeigsbrød</h2>
+          <p data-i18n="menu.sour.intro">36 timers heving med vår 1962-surdeig. Vi bruker stenmalt mel fra Holli Mølle.</p>
+        </div>
+
+        <div class="menu-grid reveal-stagger">
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-sourdough-1.jpg" alt="" data-i18n="sour1.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="sour1.title">Bergensk Surdeig</h3>
+                <span class="menu-item-price"><span data-i18n="sour1.price">78</span> kr</span>
+              </div>
+              <p data-i18n="sour1.desc">Vårt klassiske hverdagsbrød. Sprø skorpe, åpen krumme. 50% fullkorn.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag signature" data-i18n="sour1.tags">Signatur · Vegansk</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-sourdough-2.jpg" alt="" data-i18n="sour2.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="sour2.title">Rugbrød med svartvalnøtt</h3>
+                <span class="menu-item-price"><span data-i18n="sour2.price">85</span> kr</span>
+              </div>
+              <p data-i18n="sour2.desc">Tett, mørkt rugbrød med ristede valnøtter og sirup.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="sour2.tags">Vegansk</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-sourdough-3.jpg" alt="" data-i18n="sour3.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="sour3.title">Spelt & Honning</h3>
+                <span class="menu-item-price"><span data-i18n="sour3.price">92</span> kr</span>
+              </div>
+              <p data-i18n="sour3.desc">Mildt, søtlig brød med norsk spelt og lokal lyngrhonning.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="sour3.tags">Sesong</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-sourdough-4.jpg" alt="" data-i18n="sour4.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="sour4.title">Olive & Rosmarin</h3>
+                <span class="menu-item-price"><span data-i18n="sour4.price">88</span> kr</span>
+              </div>
+              <p data-i18n="sour4.desc">Hvitt surdeigsbrød med kalamata-oliven og fersk rosmarin.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="sour4.tags">Vegansk</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-sourdough-5.jpg" alt="" data-i18n="sour5.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="sour5.title">Glutenfri Bokhvete</h3>
+                <span class="menu-item-price"><span data-i18n="sour5.price">98</span> kr</span>
+              </div>
+              <p data-i18n="sour5.desc">Vårt glutenfrie surdeigsbrød — 100% bokhvete, lang heving.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="sour5.tags">Glutenfri</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-sourdough-6.jpg" alt="" data-i18n="sour6.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="sour6.title">Pølse-rull (sesong)</h3>
+                <span class="menu-item-price"><span data-i18n="sour6.price">38</span> kr</span>
+              </div>
+              <p data-i18n="sour6.desc">Klassisk Bergensrundstykke med mjølkesyret deig — kun helger.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="sour6.tags">Helg</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="croissant-divider on-alt" aria-hidden="true">
+      <div class="croissant-row">
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+          <path d="M14 28 l4-4"/>
+          <path d="M22 26 l4-4"/>
+          <path d="M30 28 l4-4"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- === PASTRY === -->
+    <section class="menu-section alt">
+      <div class="menu-section-inner">
+        <div class="section-heading reveal">
+          <span class="section-label" data-i18n="menu.past.label">Bakverk</span>
+          <h2 data-i18n="menu.past.heading">Croissanter, snurrer og wienerbrød</h2>
+          <p data-i18n="menu.past.intro">Tre dagers laminering med ekte Bordier-smør. Bakes friskt to ganger om dagen.</p>
+        </div>
+
+        <div class="menu-grid reveal-stagger">
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-pastry-1.jpg" alt="" data-i18n="past1.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="past1.title">Smørcroissant</h3>
+                <span class="menu-item-price"><span data-i18n="past1.price">42</span> kr</span>
+              </div>
+              <p data-i18n="past1.desc">Klassisk fransk croissant. Sprø, flassende, varm fra ovnen.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag signature" data-i18n="past1.tags">Signatur</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-pastry-2.jpg" alt="" data-i18n="past2.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="past2.title">Mandelcroissant</h3>
+                <span class="menu-item-price"><span data-i18n="past2.price">52</span> kr</span>
+              </div>
+              <p data-i18n="past2.desc">Croissant fylt med mandelkrem og toppet med flak.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag signature" data-i18n="past2.tags">Signatur</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-pastry-3.jpg" alt="" data-i18n="past3.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="past3.title">Pain au Chocolat</h3>
+                <span class="menu-item-price"><span data-i18n="past3.price">48</span> kr</span>
+              </div>
+              <p data-i18n="past3.desc">Med Valrhona 70% mørk sjokolade. Bakes klokken 07 og 13.</p>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-pastry-4.jpg" alt="" data-i18n="past4.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="past4.title">Kanelsnurr</h3>
+                <span class="menu-item-price"><span data-i18n="past4.price">36</span> kr</span>
+              </div>
+              <p data-i18n="past4.desc">Bergensk kanelsnurr med ekte kanel fra Sri Lanka.</p>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-pastry-5.jpg" alt="" data-i18n="past5.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="past5.title">Kardemommesnurr</h3>
+                <span class="menu-item-price"><span data-i18n="past5.price">38</span> kr</span>
+              </div>
+              <p data-i18n="past5.desc">Mors oppskrift fra 1962. Knust pistasj og glasur.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag signature" data-i18n="past5.tags">Signatur · Torsdag</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-pastry-6.jpg" alt="" data-i18n="past6.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="past6.title">Eplekrans</h3>
+                <span class="menu-item-price"><span data-i18n="past6.price">46</span> kr</span>
+              </div>
+              <p data-i18n="past6.desc">Wienerbrød med vaniljekrem og pochert eple fra Hardanger.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="past6.tags">Sesong</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="croissant-divider" aria-hidden="true">
+      <div class="croissant-row">
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+          <path d="M14 28 l4-4"/>
+          <path d="M22 26 l4-4"/>
+          <path d="M30 28 l4-4"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- === CAKES === -->
+    <section class="menu-section">
+      <div class="menu-section-inner">
+        <div class="section-heading reveal">
+          <span class="section-label" data-i18n="menu.cake.label">Kaker</span>
+          <h2 data-i18n="menu.cake.heading">Bestillingskaker og dagens fristelser</h2>
+          <p data-i18n="menu.cake.intro">Bestillingskaker bestilles minst 48 timer i forveien. Daglig utvalg av kakestykker i disken.</p>
+        </div>
+
+        <div class="menu-grid reveal-stagger">
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-cake-1.jpg" alt="" data-i18n="cake1.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="cake1.title">Bergens-spesial bløtkake</h3>
+                <span class="menu-item-price"><span data-i18n="cake1.price">650</span> kr</span>
+              </div>
+              <p data-i18n="cake1.desc">Tre lag bløtkakebunn, jordbær fra Lærdal, og pisket Røros-krem.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="cake1.tags">Bestilling</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-cake-2.jpg" alt="" data-i18n="cake2.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="cake2.title">Sjokolade-trøffelkake</h3>
+                <span class="menu-item-price"><span data-i18n="cake2.price">720</span> kr</span>
+              </div>
+              <p data-i18n="cake2.desc">Saftig, glutenfri kake med 70% Valrhona og bringebærcoulis.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="cake2.tags">Glutenfri · Bestilling</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-cake-3.jpg" alt="" data-i18n="cake3.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="cake3.title">Sitron-pistasjekake</h3>
+                <span class="menu-item-price"><span data-i18n="cake3.price">580</span> kr</span>
+              </div>
+              <p data-i18n="cake3.desc">Fluffy sitronbunn, pistasjekrem, og sviskebær på toppen.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="cake3.tags">Bestilling</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-cake-4.jpg" alt="" data-i18n="cake4.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="cake4.title">Bringebær-mandelfirkant</h3>
+                <span class="menu-item-price"><span data-i18n="cake4.price">58</span> kr</span>
+              </div>
+              <p data-i18n="cake4.desc">Mørk sjokolade på bunnen, mandelmasse, friske bringebær.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="cake4.tags">Daglig</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-cake-5.jpg" alt="" data-i18n="cake5.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="cake5.title">Sjokoladebrownie</h3>
+                <span class="menu-item-price"><span data-i18n="cake5.price">42</span> kr</span>
+              </div>
+              <p data-i18n="cake5.desc">Tett, fudgy brownie med havsalt. Bestselger blant fastboende.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="cake5.tags">Daglig</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+
+          <article class="menu-item reveal">
+            <img class="menu-item-image" src="assets/images/menu-cake-6.jpg" alt="" data-i18n="cake6.title" loading="lazy" />
+            <div class="menu-item-body">
+              <div class="menu-item-head">
+                <h3 data-i18n="cake6.title">Sitronpai</h3>
+                <span class="menu-item-price"><span data-i18n="cake6.price">54</span> kr</span>
+              </div>
+              <p data-i18n="cake6.desc">Sprø pai-bunn med sitronkrem og brent marengs.</p>
+              <div class="menu-item-tags">
+                <span class="menu-item-tag" data-i18n="cake6.tags">Onsdag · Lørdag</span>
+              </div>
+              <button type="button" class="preorder-link vipps-trigger" data-i18n="menu.preorder">Forhåndsbestill →</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- === FAQ === -->
+    <section class="faq-section">
+      <div class="faq-inner">
+        <div class="section-heading reveal">
+          <span class="section-label" data-i18n="faq.heading">Spørsmål & svar</span>
+          <h2 data-i18n="faq.heading">Spørsmål & svar</h2>
+        </div>
+
+        <div class="faq-list reveal">
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" aria-expanded="false">
+              <span data-i18n="faq1.q">Når kommer ferskt brød ut av ovnen?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner" data-i18n="faq1.a">Surdeigsbrød er klart kl. 07 hver tirsdag–lørdag. Croissanter og snurrer bakes to ganger om dagen — kl. 07 og 13.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" aria-expanded="false">
+              <span data-i18n="faq2.q">Tar dere imot bestillingskaker?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner" data-i18n="faq2.a">Ja! Bestillingskaker må bestilles minst 48 timer i forveien.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" aria-expanded="false">
+              <span data-i18n="faq3.q">Har dere glutenfrie alternativer?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner" data-i18n="faq3.a">Vi baker daglig vårt bokhvete-surdeigsbrød. Trøffelkaken er også 100% glutenfri.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button type="button" class="faq-question" aria-expanded="false">
+              <span data-i18n="faq4.q">Kan jeg reservere brød på forhånd?</span>
+              <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner" data-i18n="faq4.a">Selvfølgelig. Faste kunder kan også sette opp et stående brødabonnement.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3 data-i18n="nav.logo">Møller Bakeri</h3>
+        <p data-i18n="footer.tagline">Surdeigsbrød og bakverk siden 1962.</p>
+        <address class="footer-address" data-i18n="footer.address">Skostredet 12, 5017 Bergen</address>
+      </div>
+      <nav class="footer-links" aria-label="Sidelenker">
+        <h4 data-i18n="footer.links">Sider</h4>
+        <ul>
+          <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+          <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+          <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+        </ul>
+      </nav>
+      <div class="footer-contact">
+        <h4 data-i18n="footer.contact">Kontakt</h4>
+        <p><a href="tel:+4755314762" data-i18n="footer.phone">+47 55 31 47 62</a></p>
+        <p><a href="mailto:post@mollerbakeri.no" data-i18n="footer.email">post@mollerbakeri.no</a></p>
+        <p class="response-note" data-i18n="footer.response">Vi svarer vanligvis innen 24 timer</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copyright">© 2026 Møller Bakeri</span>
+      <a href="#" data-i18n="footer.dev">Utviklet av Bithun</a>
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=demo-bakeri-premium.ibithun.com&left_color=%23333333&right_color=%23B8842B&left_text=Views" alt="Sidevisninger" />
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="vipps-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <div class="modal-vipps-logo" aria-label="Vipps">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="10" fill="white" opacity="0.25"/>
+          <text x="10" y="14" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif" font-weight="bold">V</text>
+        </svg>
+        Vipps
+      </div>
+      <h2 id="modal-title" data-i18n="modal.title">Dette er en demo</h2>
+      <p data-i18n="modal.body1">Dette er en demo — Vipps-betaling aktiveres når din konto er satt opp.</p>
+      <p>
+        <span data-i18n="modal.body2">Kontakt oss for å se hvordan dette fungerer for ditt bakeri:</span>
+        <a href="mailto:post@bakeridemo.no" data-i18n="modal.email">post@bakeridemo.no</a>
+      </p>
+      <button type="button" class="modal-close-btn" data-i18n="modal.close">Lukk</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

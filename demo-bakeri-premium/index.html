@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Møller Bakeri — Surdeigsbrød og bakverk i Bergen</title>
+  <meta name="description" content="Familiebakeri i Skostredet, Bergen siden 1962. Surdeigsbrød med 36 timers heving, croissanter med tre dagers laminering, og bestillingskaker." />
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Møller Bakeri — Surdeigsbrød og bakverk i Bergen" />
+  <meta property="og:description" content="Familiebakeri i Skostredet, Bergen siden 1962." />
+  <meta property="og:image"       content="https://demo-bakeri-classic.vercel.app/assets/images/hero-bread.jpg" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- === NAVIGATION === -->
+  <nav class="nav" role="navigation" aria-label="Hovednavigasjon">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="26" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 5 L16 28" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="13" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 10)"/>
+          <ellipse cx="19" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 10)"/>
+          <ellipse cx="12" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 12 15)"/>
+          <ellipse cx="20" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 20 15)"/>
+          <ellipse cx="13" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 20)"/>
+          <ellipse cx="19" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 20)"/>
+        </svg>
+        <span data-i18n="nav.logo">Møller Bakeri</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+        <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+        <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+        <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Bytt språk">EN</button>
+        <button type="button" class="hamburger" id="hamburger" aria-label="Åpne meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigasjonsmeny">
+    <a href="index.html"   data-i18n="nav.home">Hjem</a>
+    <a href="menu.html"    data-i18n="nav.menu">Meny</a>
+    <a href="about.html"   data-i18n="nav.about">Om oss</a>
+    <a href="gallery.html" data-i18n="nav.gallery">Galleri</a>
+    <button type="button" class="lang-toggle" id="mobile-lang-toggle">EN</button>
+  </div>
+
+  <main>
+
+    <!-- === HERO === -->
+    <!-- Static JPG sits underneath as fallback. The MP4 paints over it once it
+         loads — when the file is missing, the video element stays transparent
+         and the JPG below shows through. -->
+    <section class="hero" aria-label="Velkomstbilde">
+      <div class="hero-bg" style="background-image: url('assets/images/hero-bread.jpg');" role="img">
+        <img data-i18n="hero.img.alt" src="" alt="" style="display:none;" />
+      </div>
+      <video
+        class="hero-video"
+        autoplay muted loop playsinline preload="metadata"
+        poster="assets/images/hero-bread.jpg"
+        aria-hidden="true">
+        <source src="assets/videos/hero-bread.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-eyebrow" data-i18n="hero.eyebrow">Familiebakeri i Bergen siden 1962</span>
+        <h1 data-i18n="hero.headline">Surdeigsbrød og bakverk, <em>bakt med tid</em></h1>
+        <p data-i18n="hero.sub">Tre generasjoner i samme bakeri. Lange hevinger, ekte smør, og en duft som vekker hele Marken hver morgen.</p>
+        <a href="menu.html" class="btn btn-accent" data-i18n="hero.cta">Se dagens bakst</a>
+      </div>
+    </section>
+
+    <!-- === DAILY BAKE COUNTER === -->
+    <section class="bake-counter" aria-label="Dagens bakst — sanntid">
+      <div class="bake-counter-inner">
+        <span class="bake-counter-eyebrow">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span data-i18n="counter.label">Direkte fra ovnen</span>
+        </span>
+        <h2 data-i18n="counter.heading">Bakt i dag</h2>
+
+        <div class="counter-stats">
+          <div class="counter-stat reveal">
+            <svg class="counter-stat-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <ellipse cx="24" cy="28" rx="18" ry="11" fill="currentColor" opacity="0.15"/>
+              <ellipse cx="24" cy="28" rx="18" ry="11" stroke="currentColor"/>
+              <path d="M14 22 c2-3 6-3 8 0" stroke-linecap="round"/>
+              <path d="M22 20 c2-3 6-3 8 0" stroke-linecap="round"/>
+              <path d="M30 22 c2-3 6-3 8 0" stroke-linecap="round"/>
+            </svg>
+            <div class="counter-stat-number" data-counter-target="47">0</div>
+            <div class="counter-stat-label" data-i18n="counter.bread">Surdeigsbrød</div>
+          </div>
+
+          <div class="counter-stat reveal" style="transition-delay: 0.15s;">
+            <svg class="counter-stat-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M10 32 c4-8 8-12 14-12 s10 4 14 12 c-4 4-9 6-14 6 s-10-2-14-6 z" fill="currentColor" opacity="0.15"/>
+              <path d="M10 32 c4-8 8-12 14-12 s10 4 14 12 c-4 4-9 6-14 6 s-10-2-14-6 z"/>
+              <path d="M16 28 l4-4 M22 26 l4-4 M28 28 l4-4"/>
+            </svg>
+            <div class="counter-stat-number" data-counter-target="124">0</div>
+            <div class="counter-stat-label" data-i18n="counter.croissants">Croissanter</div>
+          </div>
+
+          <div class="counter-stat reveal" style="transition-delay: 0.3s;">
+            <svg class="counter-stat-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="10" y="20" width="28" height="18" rx="2" fill="currentColor" opacity="0.15"/>
+              <rect x="10" y="20" width="28" height="18" rx="2"/>
+              <circle cx="18" cy="16" r="2" fill="currentColor"/>
+              <circle cx="24" cy="14" r="2" fill="currentColor"/>
+              <circle cx="30" cy="16" r="2" fill="currentColor"/>
+              <line x1="14" y1="20" x2="14" y2="38"/>
+              <line x1="34" y1="20" x2="34" y2="38"/>
+            </svg>
+            <div class="counter-stat-number" data-counter-target="38">0</div>
+            <div class="counter-stat-label" data-i18n="counter.cakes">Kakestykker</div>
+          </div>
+        </div>
+
+        <p class="bake-counter-meta">
+          <span data-i18n="counter.updated">Oppdatert</span> <span id="counter-time">07:42</span> · <span data-i18n="counter.refreshes">oppdateres hvert 30. minutt</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Animated croissant divider -->
+    <div class="croissant-divider on-alt" aria-hidden="true">
+      <div class="croissant-row">
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+          <path d="M14 28 l4-4"/>
+          <path d="M22 26 l4-4"/>
+          <path d="M30 28 l4-4"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- === TODAY'S BAKE === -->
+    <section class="todays-bake">
+      <div class="todays-bake-inner">
+        <div class="todays-bake-heading reveal">
+          <span class="section-label" data-i18n="today.label">I ovnen i dag</span>
+          <h2 data-i18n="today.heading">Dagens bakst</h2>
+        </div>
+
+        <div class="todays-grid reveal-stagger">
+          <article class="bake-card reveal">
+            <img class="bake-card-image" src="assets/images/today-sourdough.jpg" alt="" data-i18n="today1.title" loading="lazy" />
+            <div class="bake-card-body">
+              <span class="bake-card-tag" data-i18n="today1.tag">Surdeig</span>
+              <h3 data-i18n="today1.title">Bergensk Surdeig</h3>
+              <p data-i18n="today1.text">Vårt klassiske surdeigsbrød — 36 timers heving, sprø skorpe, åpen krumme.</p>
+              <div class="bake-card-footer">
+                <span class="bake-card-price"><span data-i18n="today1.price">78</span><small data-i18n="today.kr">kr</small></span>
+                <a href="menu.html" class="text-link" data-i18n="cat1.link">Se brødene <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="bake-card reveal">
+            <img class="bake-card-image" src="assets/images/today-croissant.jpg" alt="" data-i18n="today2.title" loading="lazy" />
+            <div class="bake-card-body">
+              <span class="bake-card-tag" data-i18n="today2.tag">Bakverk</span>
+              <h3 data-i18n="today2.title">Smørcroissant</h3>
+              <p data-i18n="today2.text">Tre dagers laminering med fransk Bordier-smør. Sprø, flassende.</p>
+              <div class="bake-card-footer">
+                <span class="bake-card-price"><span data-i18n="today2.price">42</span><small data-i18n="today.kr">kr</small></span>
+                <a href="menu.html" class="text-link" data-i18n="cat2.link">Se bakverk <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="bake-card reveal">
+            <img class="bake-card-image" src="assets/images/today-cardamom.jpg" alt="" data-i18n="today3.title" loading="lazy" />
+            <div class="bake-card-body">
+              <span class="bake-card-tag" data-i18n="today3.tag">Kake</span>
+              <h3 data-i18n="today3.title">Kardemommesnurr</h3>
+              <p data-i18n="today3.text">Mors oppskrift fra 1962. Knust pistasj, glasur, kun torsdager.</p>
+              <div class="bake-card-footer">
+                <span class="bake-card-price"><span data-i18n="today3.price">38</span><small data-i18n="today.kr">kr</small></span>
+                <a href="menu.html" class="text-link" data-i18n="cat3.link">Se kaker <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- === SOURDOUGH TIMELINE === -->
+    <section class="timeline-section" aria-label="Surdeigens reise">
+      <div class="timeline-inner">
+        <div class="timeline-heading reveal">
+          <span class="section-label" data-i18n="tl.label">Surdeigens reise</span>
+          <h2 data-i18n="tl.heading">Fra mel til skive — 36 timer</h2>
+          <p data-i18n="tl.intro">Vi har bakt på samme måte siden 1962. Hver dag, hver time, hver sjekk — fra kornet som males om kvelden til skiven du tar med hjem neste morgen.</p>
+        </div>
+
+        <div class="timeline-track" id="timeline-track">
+          <div class="timeline-step" data-step="0">
+            <div class="timeline-step-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M16 4 v24" stroke-linecap="round"/>
+                <ellipse cx="13" cy="9" rx="2" ry="3" fill="currentColor" transform="rotate(-28 13 9)"/>
+                <ellipse cx="19" cy="9" rx="2" ry="3" fill="currentColor" transform="rotate(28 19 9)"/>
+                <ellipse cx="12" cy="15" rx="2" ry="3" fill="currentColor" transform="rotate(-28 12 15)"/>
+                <ellipse cx="20" cy="15" rx="2" ry="3" fill="currentColor" transform="rotate(28 20 15)"/>
+                <ellipse cx="13" cy="21" rx="2" ry="3" fill="currentColor" transform="rotate(-28 13 21)"/>
+                <ellipse cx="19" cy="21" rx="2" ry="3" fill="currentColor" transform="rotate(28 19 21)"/>
+              </svg>
+            </div>
+            <div class="timeline-step-time" data-i18n="tl1.time">Kveld · 18:00</div>
+            <h3 data-i18n="tl1.title">Maling</h3>
+            <p data-i18n="tl1.text">Norsk korn males på Knuts steinmølle.</p>
+          </div>
+
+          <div class="timeline-step" data-step="1">
+            <div class="timeline-step-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M8 8 v8 c0 5 3 8 8 8 s8-3 8-8 v-8 z" fill="currentColor" fill-opacity="0.15"/>
+                <path d="M8 8 v8 c0 5 3 8 8 8 s8-3 8-8 v-8 z" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="13" cy="14" r="1" fill="currentColor"/>
+                <circle cx="18" cy="17" r="1" fill="currentColor"/>
+                <circle cx="15" cy="19" r="1" fill="currentColor"/>
+                <line x1="6" y1="8" x2="26" y2="8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="timeline-step-time" data-i18n="tl2.time">Kveld · 21:00</div>
+            <h3 data-i18n="tl2.title">Surdeig matet</h3>
+            <p data-i18n="tl2.text">1962-starteren mates med fersk mel og vann.</p>
+          </div>
+
+          <div class="timeline-step" data-step="2">
+            <div class="timeline-step-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <ellipse cx="16" cy="20" rx="11" ry="8" fill="currentColor" fill-opacity="0.15"/>
+                <ellipse cx="16" cy="20" rx="11" ry="8"/>
+                <path d="M11 16 c1-2 3-2 4 0 M17 14 c1-2 3-2 4 0 M13 12 c1-1 3-1 4 0" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="timeline-step-time" data-i18n="tl3.time">Natt · 23:00</div>
+            <h3 data-i18n="tl3.title">Elting</h3>
+            <p data-i18n="tl3.text">Mel, vann, salt og surdeig — for hånd, ikke maskin.</p>
+          </div>
+
+          <div class="timeline-step" data-step="3">
+            <div class="timeline-step-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="16" cy="16" r="12" fill="currentColor" fill-opacity="0.12"/>
+                <circle cx="16" cy="16" r="12"/>
+                <polyline points="16 8 16 16 22 18" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="16" y="29" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif" font-weight="600">36t</text>
+              </svg>
+            </div>
+            <div class="timeline-step-time" data-i18n="tl4.time">36 timer</div>
+            <h3 data-i18n="tl4.title">Heving</h3>
+            <p data-i18n="tl4.text">Kald, langsom heving — det er her smaken bygges.</p>
+          </div>
+
+          <div class="timeline-step" data-step="4">
+            <div class="timeline-step-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <rect x="4" y="10" width="24" height="18" rx="2" fill="currentColor" fill-opacity="0.15"/>
+                <rect x="4" y="10" width="24" height="18" rx="2"/>
+                <line x1="4" y1="18" x2="28" y2="18"/>
+                <path d="M10 24 c1-2 3-2 4 0 M16 24 c1-2 3-2 4 0" stroke-linecap="round"/>
+                <path d="M14 6 c0 2-2 2-2 4 M18 4 c0 2-2 2-2 4" stroke-linecap="round" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="timeline-step-time" data-i18n="tl5.time">Morgen · 06:30</div>
+            <h3 data-i18n="tl5.title">I ovnen</h3>
+            <p data-i18n="tl5.text">240°C, dampovn — sprø skorpe, åpen krumme. Klar kl. 07.</p>
+          </div>
+        </div>
+
+        <p class="timeline-cta">
+          <span data-i18n="tl.cta">Akkurat nå:</span> <strong id="tl-now-step" data-i18n="tl4.title">Heving</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Animated croissant divider -->
+    <div class="croissant-divider on-alt" aria-hidden="true">
+      <div class="croissant-row">
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+          <path d="M14 28 l4-4"/>
+          <path d="M22 26 l4-4"/>
+          <path d="M30 28 l4-4"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- === STORY === -->
+    <section class="story-home">
+      <div class="story-home-inner">
+        <div class="story-home-text reveal">
+          <span class="section-label" data-i18n="story.label">Vår historie</span>
+          <h2 data-i18n="story.heading">Et bakeri på Marken — siden bestefar Knut åpnet døren</h2>
+          <p data-i18n="story.p1">Møller Bakeri har stått i Skostredet siden 1962, da bestefar Knut Møller flyttet fra Voss til Bergen med en steinmølle, en surdeigsstarter, og en idé om at brød skulle ta tid.</p>
+          <p data-i18n="story.p2">I dag driver Anna og Lars videre, med Knuts barnebarn Selma som lærling. Vi maler fortsatt en del av kornet selv og baker hver natt for å ha ferskt klart kl. 07.</p>
+          <p data-i18n="story.p3">Kom inn for kaffe og en croissant — vi spør gjerne hvordan dagen din går.</p>
+          <p class="story-signoff" data-i18n="story.signoff">– Familien Møller</p>
+        </div>
+
+        <div class="story-home-image reveal" style="transition-delay: 0.15s;">
+          <img
+            src="assets/images/story-counter.jpg"
+            data-i18n="story.img.alt"
+            alt="Anna Møller og Lars Møller bak disken i bakeriet"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Animated croissant divider -->
+    <div class="croissant-divider on-deep" aria-hidden="true">
+      <div class="croissant-row">
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+          <path d="M14 28 l4-4"/>
+          <path d="M22 26 l4-4"/>
+          <path d="M30 28 l4-4"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- === HOURS STRIP === -->
+    <div class="hours-strip" role="region" aria-label="Åpningstider og adresse">
+      <div class="hours-strip-inner">
+        <div class="hours-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span><strong data-i18n="hours.weekday">Tirsdag–fredag</strong> · <span data-i18n="hours.weekday.value">07:00 – 17:00</span></span>
+        </div>
+        <div class="hours-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <span><strong data-i18n="hours.weekend">Lørdag</strong> · <span data-i18n="hours.weekend.value">08:00 – 15:00</span></span>
+        </div>
+        <div class="hours-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span data-i18n="hours.location">Skostredet 12, 5017 Bergen</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Animated croissant divider -->
+    <div class="croissant-divider" aria-hidden="true">
+      <div class="croissant-row">
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+          <path d="M14 28 l4-4"/>
+          <path d="M22 26 l4-4"/>
+          <path d="M30 28 l4-4"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+        <svg class="croissant-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z" fill="currentColor" fill-opacity="0.18"/>
+          <path d="M8 30 c2-9 9-14 16-14 s14 5 16 14 c-3 4-9 6-16 6 s-13-2-16-6 z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- === CATEGORIES PREVIEW === -->
+    <section class="categories">
+      <div class="categories-inner">
+        <div class="categories-heading reveal">
+          <span class="section-label" data-i18n="cat.label">Vårt utvalg</span>
+          <h2 data-i18n="cat.heading">Tre håndverk under samme tak</h2>
+        </div>
+
+        <div class="categories-grid reveal-stagger">
+          <a href="menu.html" class="category-card reveal">
+            <img src="assets/images/cat-sourdough.jpg" alt="" data-i18n="cat1.title" loading="lazy" />
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <h3 data-i18n="cat1.title">Surdeigsbrød</h3>
+              <p data-i18n="cat1.text">Lange hevinger med vill surdeig. 8 sorter, daglig bakst.</p>
+              <span class="category-card-link" data-i18n="cat1.link">Se brødene →</span>
+            </div>
+          </a>
+
+          <a href="menu.html" class="category-card reveal">
+            <img src="assets/images/cat-pastry.jpg" alt="" data-i18n="cat2.title" loading="lazy" />
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <h3 data-i18n="cat2.title">Bakverk</h3>
+              <p data-i18n="cat2.text">Croissanter, snurrer og wienerbrød — alt fra bunnen.</p>
+              <span class="category-card-link" data-i18n="cat2.link">Se bakverk →</span>
+            </div>
+          </a>
+
+          <a href="menu.html" class="category-card reveal">
+            <img src="assets/images/cat-cake.jpg" alt="" data-i18n="cat3.title" loading="lazy" />
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <h3 data-i18n="cat3.title">Kaker</h3>
+              <p data-i18n="cat3.text">Bestillingskaker, sesongkaker og daglige fristelser.</p>
+              <span class="category-card-link" data-i18n="cat3.link">Se kaker →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- === TESTIMONIAL === -->
+    <section class="testimonial" aria-label="Kundeanmeldelse">
+      <div class="testimonial-bg-quote" aria-hidden="true">&ldquo;</div>
+      <div class="testimonial-inner reveal">
+        <blockquote>
+          <p class="testimonial-quote" data-i18n="testimonial.quote">"Jeg bestiller bryllupskakene mine her, men også bare et brød på vei hjem fra jobb."</p>
+          <footer class="testimonial-author" data-i18n="testimonial.author">— Ingrid B., fast kunde i 14 år</footer>
+        </blockquote>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- === FOOTER === -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3 data-i18n="nav.logo">Møller Bakeri</h3>
+        <p data-i18n="footer.tagline">Surdeigsbrød og bakverk siden 1962. Bakt for hånd, daglig.</p>
+        <address class="footer-address" data-i18n="footer.address">Skostredet 12, 5017 Bergen</address>
+      </div>
+
+      <nav class="footer-links" aria-label="Sidelenker">
+        <h4 data-i18n="footer.links">Sider</h4>
+        <ul>
+          <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+          <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+          <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-contact">
+        <h4 data-i18n="footer.contact">Kontakt</h4>
+        <p><a href="tel:+4755314762" data-i18n="footer.phone">+47 55 31 47 62</a></p>
+        <p><a href="mailto:post@mollerbakeri.no" data-i18n="footer.email">post@mollerbakeri.no</a></p>
+        <p class="response-note" data-i18n="footer.response">Vi svarer vanligvis innen 24 timer</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="footer.copyright">© 2026 Møller Bakeri</span>
+      <a href="#" data-i18n="footer.dev">Utviklet av Bithun</a>
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=demo-bakeri-premium.ibithun.com&left_color=%23333333&right_color=%23B8842B&left_text=Views" alt="Sidevisninger" />
+    </div>
+  </footer>
+
+  <!-- === VIPPS MODAL === -->
+  <div class="modal-backdrop" id="vipps-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <div class="modal-vipps-logo" aria-label="Vipps">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="10" fill="white" opacity="0.25"/>
+          <text x="10" y="14" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif" font-weight="bold">V</text>
+        </svg>
+        Vipps
+      </div>
+      <h2 id="modal-title" data-i18n="modal.title">Dette er en demo</h2>
+      <p data-i18n="modal.body1">Dette er en demo — Vipps-betaling aktiveres når din konto er satt opp.</p>
+      <p>
+        <span data-i18n="modal.body2">Kontakt oss for å se hvordan dette fungerer for ditt bakeri:</span>
+        <a href="mailto:post@bakeridemo.no" data-i18n="modal.email">post@bakeridemo.no</a>
+      </p>
+      <button type="button" class="modal-close-btn" data-i18n="modal.close">Lukk</button>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

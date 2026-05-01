@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Møller Bakeri — Galleri</title>
+  <meta name="description" content="Bilder fra Møller Bakeri i Skostredet — brødene, bakverkene, og folket bak benken." />
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="nav" role="navigation" aria-label="Hovednavigasjon">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="22" height="26" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 5 L16 28" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="13" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 10)"/>
+          <ellipse cx="19" cy="10" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 10)"/>
+          <ellipse cx="12" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 12 15)"/>
+          <ellipse cx="20" cy="15" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 20 15)"/>
+          <ellipse cx="13" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(-28 13 20)"/>
+          <ellipse cx="19" cy="20" rx="2.2" ry="3.2" fill="currentColor" transform="rotate(28 19 20)"/>
+        </svg>
+        <span data-i18n="nav.logo">Møller Bakeri</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+        <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+        <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+        <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Bytt språk">EN</button>
+        <button type="button" class="hamburger" id="hamburger" aria-label="Åpne meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigasjonsmeny">
+    <a href="index.html"   data-i18n="nav.home">Hjem</a>
+    <a href="menu.html"    data-i18n="nav.menu">Meny</a>
+    <a href="about.html"   data-i18n="nav.about">Om oss</a>
+    <a href="gallery.html" data-i18n="nav.gallery">Galleri</a>
+    <button type="button" class="lang-toggle" id="mobile-lang-toggle">EN</button>
+  </div>
+
+  <main>
+
+    <section class="page-banner" aria-label="Topbilde">
+      <div class="page-banner-bg" style="background-image: url('assets/images/banner-gallery.jpg');"></div>
+      <div class="page-banner-overlay"></div>
+      <div class="page-banner-content">
+        <h1 data-i18n="gallery.banner.title">Galleri</h1>
+        <p data-i18n="gallery.banner.sub">Bakeriet, brødene, og folket</p>
+      </div>
+    </section>
+
+    <section class="gallery-grid-section">
+      <div class="gallery-grid-inner">
+        <div class="gallery-grid">
+          <div class="gallery-item" data-caption="Bergensk Surdeig"><img src="assets/images/gallery-1.jpg" alt="" data-i18n="gallery.img1.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Smørcroissanter"><img src="assets/images/gallery-2.jpg" alt="" data-i18n="gallery.img2.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Kanelsnurrer i støpning"><img src="assets/images/gallery-3.jpg" alt="" data-i18n="gallery.img3.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Skostredet 12"><img src="assets/images/gallery-4.jpg" alt="" data-i18n="gallery.img4.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Pain au chocolat & mandelcroissant"><img src="assets/images/gallery-5.jpg" alt="" data-i18n="gallery.img5.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Bestillingskake med pistasj"><img src="assets/images/gallery-6.jpg" alt="" data-i18n="gallery.img6.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Steinmøllen i bruk"><img src="assets/images/gallery-7.jpg" alt="" data-i18n="gallery.img7.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="1962-surdeigen, fortsatt aktiv"><img src="assets/images/gallery-8.jpg" alt="" data-i18n="gallery.img8.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Morgen i kaféen"><img src="assets/images/gallery-9.jpg" alt="" data-i18n="gallery.img9.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Brødhyllene kl. 07"><img src="assets/images/gallery-10.jpg" alt="" data-i18n="gallery.img10.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Brownie med havsalt"><img src="assets/images/gallery-11.jpg" alt="" data-i18n="gallery.img11.alt" loading="lazy" /></div>
+          <div class="gallery-item" data-caption="Soloppgang gjennom vinduet"><img src="assets/images/gallery-12.jpg" alt="" data-i18n="gallery.img12.alt" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- === LIGHTBOX === -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bildevisning">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Lukk">×</button>
+    <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Forrige">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Neste">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3 data-i18n="nav.logo">Møller Bakeri</h3>
+        <p data-i18n="footer.tagline">Surdeigsbrød og bakverk siden 1962.</p>
+        <address class="footer-address" data-i18n="footer.address">Skostredet 12, 5017 Bergen</address>
+      </div>
+      <nav class="footer-links" aria-label="Sidelenker">
+        <h4 data-i18n="footer.links">Sider</h4>
+        <ul>
+          <li><a href="index.html"   data-i18n="nav.home">Hjem</a></li>
+          <li><a href="menu.html"    data-i18n="nav.menu">Meny</a></li>
+          <li><a href="about.html"   data-i18n="nav.about">Om oss</a></li>
+          <li><a href="gallery.html" data-i18n="nav.gallery">Galleri</a></li>
+        </ul>
+      </nav>
+      <div class="footer-contact">
+        <h4 data-i18n="footer.contact">Kontakt</h4>
+        <p><a href="tel:+4755314762" data-i18n="footer.phone">+47 55 31 47 62</a></p>
+        <p><a href="mailto:post@mollerbakeri.no" data-i18n="footer.email">post@mollerbakeri.no</a></p>
+        <p class="response-note" data-i18n="footer.response">Vi svarer vanligvis innen 24 timer</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copyright">© 2026 Møller Bakeri</span>
+      <a href="#" data-i18n="footer.dev">Utviklet av Bithun</a>
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=demo-bakeri-classic.ibithun.com&left_color=%23333333&right_color=%23B8842B&left_text=Views" alt="Sidevisninger" />
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

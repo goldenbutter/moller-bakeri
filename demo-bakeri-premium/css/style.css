@@ -1964,6 +1964,8 @@ p { color: var(--color-text); }
   .bake-counter .counter-stats { grid-template-columns: 1fr; gap: 2rem; }
   .timeline-track { grid-template-columns: 1fr; gap: 2rem; }
   .croissant-divider { height: 64px; }
+  .hero-bg { background-position: 65% 50%; }
+  .hero-video { object-position: 65% 50%; }
 }
 
 /* === PREMIUM MOBILE MENU — 320px floating glass card ===
@@ -2049,7 +2051,7 @@ p { color: var(--color-text); }
 .menu-item-image,
 .bake-card-image,
 .category-card img {
-  object-position: center 30%;
+  object-position: center 50%;
 }
 
 @media (max-width: 768px) {
@@ -2061,4 +2063,12 @@ p { color: var(--color-text); }
     height: auto;
   }
 }
+
+/* Per-image focal-point overrides — applied via class when the default
+   50% crop shows too much background for a specific source image.
+   Use !important to beat the multi-selector rules above.           */
+.focal-lower { object-position: center 55% !important; }  /* bread on shelf — push down slightly  */
+.focal-low   { object-position: center 70% !important; }  /* cake on table — push well down       */
+.focal-right { object-position: 65% 40% !important; }     /* hero-bread.jpg — subject on right    */
+.bg-focal-right { background-position: 65% center !important; } /* banner BGs with right subject */
 

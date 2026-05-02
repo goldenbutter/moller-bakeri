@@ -259,6 +259,27 @@
 - **How to apply going forward:** new commit log entries continue in `docs/BUILD_PROGRESS.md`. Anything an AI tool wants to leave behind locally goes in `.claude/` and stays gitignored.
 - **How to revert:** `git revert <sha>` and `git mv docs/BUILD_PROGRESS.md .claude/BUILD_PROGRESS.md` plus restore the `.gitignore` exception.
 
+### Commit `130d76c` — Pre-skill parity cleanup
+- **Date:** 2026-05-02
+- **Type:** chore
+- **Files touched:** `.gitignore`, `README.md`, `demo-bakeri-{classic,premium}/{index,menu,about,gallery}.html`, `demo-bakeri-{classic,premium}/js/main.js`
+- **What:**
+  - `.gitignore`: added `_public/` (Nano Banana staging dir, family-wide convention) and `Thumbs.db`.
+  - `README.md`: corrected design-tokens table to match actual `:root` (background `#FBF6EC`, both tiers identical palette); dropped false claim that classic carries `videos/` for parity (it does not — premium-only); rephrased the Photography note to drop the explicit "AI-generated" wording per global no-AI-attribution rule.
+  - Modal CTA email consolidated from `post@bakeridemo.no` → `post@mollerbakeri.no` across 6 HTML pages and 4 translations entries (NO + EN per tier). One email per customer simplifies fork. Demo-CTA inbox idea moves to a footer link instead.
+  - Footer tagline normalized: `menu.html`, `about.html`, `gallery.html` in BOTH tiers were carrying the truncated form (`Surdeigsbrød og bakverk siden 1962.`); now match `index.html`'s full form (`...siden 1962. Bakt for hånd, daglig.`). JS i18n already overrides on premium so only the static fallback drifted.
+  - Open Graph + Twitter Card meta block added to `menu.html`, `about.html`, `gallery.html` in both tiers (6 pages — see follow-up commit for the 2 × 404). Each page picks its own banner image so a direct share renders the page-specific preview, not the home hero.
+- **Why:** pre-skill parity audit (2026-05-02) flagged these as accidental drift before the prototype gets productised as `moller-bakeri-skill`. Fixing them in the prototype means the per-customer fork procedure inherits the correct shape, instead of every fork having to re-do the same fixes.
+- **How to revert:** `git revert 130d76c`. Each change is also reversible by hand from the diff stat.
+
+### Commit `340084a` — Add OG meta to 404 pages for parity
+- **Date:** 2026-05-02
+- **Type:** chore
+- **Files touched:** `demo-bakeri-{classic,premium}/404.html`
+- **What:** Added the same OG/Twitter Card block to both 404 pages. `og:image` falls back to `hero-bread.jpg` (no dedicated 404 banner); `og:url` points at the page's own canonical URL.
+- **Why:** completeness — every HTML page now carries OG meta. Even with `noindex/nofollow`, a direct share of a 404 URL should preview cleanly rather than render empty.
+- **How to revert:** `git revert 340084a`.
+
 ### Future entries
 
 > Template for the next commit log entry — copy and fill in:

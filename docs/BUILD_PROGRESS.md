@@ -269,7 +269,7 @@
   - Modal CTA email consolidated from `post@bakeridemo.no` → `post@mollerbakeri.no` across 6 HTML pages and 4 translations entries (NO + EN per tier). One email per customer simplifies fork. Demo-CTA inbox idea moves to a footer link instead.
   - Footer tagline normalized: `menu.html`, `about.html`, `gallery.html` in BOTH tiers were carrying the truncated form (`Surdeigsbrød og bakverk siden 1962.`); now match `index.html`'s full form (`...siden 1962. Bakt for hånd, daglig.`). JS i18n already overrides on premium so only the static fallback drifted.
   - Open Graph + Twitter Card meta block added to `menu.html`, `about.html`, `gallery.html` in both tiers (6 pages — see follow-up commit for the 2 × 404). Each page picks its own banner image so a direct share renders the page-specific preview, not the home hero.
-- **Why:** pre-skill parity audit (2026-05-02) flagged these as accidental drift before the prototype gets productised as `moller-bakeri-skill`. Fixing them in the prototype means the per-customer fork procedure inherits the correct shape, instead of every fork having to re-do the same fixes.
+- **Why:** pre-skill parity audit (2026-05-02) flagged these as accidental drift before the prototype gets productised as `bakeri-skill`. Fixing them in the prototype means the per-customer fork procedure inherits the correct shape, instead of every fork having to re-do the same fixes.
 - **How to revert:** `git revert 130d76c`. Each change is also reversible by hand from the diff stat.
 
 ### Commit `340084a` — Add OG meta to 404 pages for parity

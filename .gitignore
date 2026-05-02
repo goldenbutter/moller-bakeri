@@ -1,6 +1,5 @@
 CLAUDE.md
-.claude/*
-!.claude/BUILD_PROGRESS.md
+.claude/
 screenshot/
 *.zip
 .env*

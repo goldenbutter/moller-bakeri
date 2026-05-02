@@ -248,6 +248,17 @@
 - **Why:** User point — demo content shouldn't compete with the real client site in search results, and shouldn't appear in Google when prospects search the customer's actual brand later. Belt-and-suspenders: meta-robots + robots.txt.
 - **How to revert:** `git revert <sha>`. Restores indexability and re-creates the sitemaps.
 
+### Commit `<pending>` — Move build log out of .claude/, fully untrack that dir
+- **Date:** 2026-05-01
+- **Type:** chore
+- **Files touched:** `.claude/BUILD_PROGRESS.md` → `docs/BUILD_PROGRESS.md` (rename), `.gitignore`
+- **What:**
+  - Moved this file from `.claude/BUILD_PROGRESS.md` to `docs/BUILD_PROGRESS.md`. Git rename detection preserves history.
+  - `.gitignore` simplified: the previous `.claude/*` plus `!.claude/BUILD_PROGRESS.md` exception was replaced with a flat `.claude/` so the entire directory is ignored.
+- **Why:** Bithun's global rule — codebase must not visibly expose AI tool names. `.claude/` showing in the GitHub file tree violated that. Build log itself is fine to keep (no AI mentions inside), just at a neutral path.
+- **How to apply going forward:** new commit log entries continue in `docs/BUILD_PROGRESS.md`. Anything an AI tool wants to leave behind locally goes in `.claude/` and stays gitignored.
+- **How to revert:** `git revert <sha>` and `git mv docs/BUILD_PROGRESS.md .claude/BUILD_PROGRESS.md` plus restore the `.gitignore` exception.
+
 ### Future entries
 
 > Template for the next commit log entry — copy and fill in:

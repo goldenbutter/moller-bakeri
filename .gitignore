@@ -11,3 +11,7 @@ node_modules/
 .playwright-mcp/
 *.png
 demo-bakeri-premium/assets/hero-bread..mp4
+
+# IDE config
+.vscode/
+.idea/

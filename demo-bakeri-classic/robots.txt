@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://demo-bakeri-classic.ibithun.com/sitemap.xml

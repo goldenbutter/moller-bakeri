@@ -280,6 +280,73 @@
 - **Why:** completeness — every HTML page now carries OG meta. Even with `noindex/nofollow`, a direct share of a 404 URL should preview cleanly rather than render empty.
 - **How to revert:** `git revert 340084a`.
 
+### Commit `054145f` — Rename docs/ → _docs/ for family-wide underscore-prefix convention
+- **Date:** 2026-05-02
+- **Type:** chore
+- **Files touched:** `docs/BUILD_PROGRESS.md` → `_docs/BUILD_PROGRESS.md` (git mv with rename detection at 98%); 4 self-references inside the file updated; CLAUDE.md (gitignored) + bakeri-skill SKILL.md + 5 project memory files also updated to point at the new path
+- **What:** `git mv docs _docs` to align with Bithun's family-wide pattern: every prototype folder name starts with `_` except the deployable `demo-*` subfolders. Rename detection preserved git history of the file. All references in Bakery's own files + the productised skill + the project memory updated in lockstep.
+- **Why:** see "Family-wide build-log convention discussion" at the bottom of this log for the full context. Bakery was the only prototype using `docs/` (no underscore); other prototypes' agent-internal artifacts already lived in `_docs/`. Bringing bakery in line + fixing the family means every prototype has a consistent `_docs/BUILD_PROGRESS.md` location going forward.
+- **How to revert:** `git revert 054145f` or `git mv _docs docs` plus reverse the reference updates.
+
+### Commit `ab2852b` — Gitignore _docs/* with BUILD_PROGRESS.md exception
+- **Date:** 2026-05-02
+- **Type:** chore
+- **Files touched:** `.gitignore`
+- **What:** Added a 4-line block:
+  ```gitignore
+  # Agent-internal artifacts (lead research, prospect lists, search prompts, decisions)
+  # Exception: BUILD_PROGRESS.md is the project's tracked change log — keep visible on GitHub
+  _docs/*
+  !_docs/BUILD_PROGRESS.md
+  ```
+  Verified with `git check-ignore -v _docs/BUILD_PROGRESS.md _docs/sample.pdf` — build log NOT ignored (exception fires); other files ignored.
+- **Why:** Bakery doesn't currently have lead-research files in `_docs/` (it's the architectural reference, not a lead-gen target), but the same gitignore rule needs to live in every prototype going forward so future agents inherit the pattern uniformly. Adding it here means a future agent who copies bakery's `.gitignore` as a template gets the rule automatically.
+- **How to revert:** `git revert ab2852b` or remove the 4 lines.
+
+---
+
+## Family-wide build-log convention discussion (2026-05-02)
+
+> This entry captures cross-project work done from inside this Bakery session because the discussion + decision originated from auditing Bakery's own setup. The actual changes in other prototype repos are committed in those repos with their own commit logs; this entry is the cross-reference so a future Bakery agent reading top-to-bottom understands the full picture and can trace decisions back to the conversation that produced them.
+
+### The mismatch Bithun surfaced
+
+After the bakery prototype was productised as `bakeri-skill` and Bithun went looking at the build-log file, three inconsistencies surfaced across the family of already-shipped prototypes:
+
+1. **Mismatched location.** Bakery's build log lived at `docs/BUILD_PROGRESS.md` (no underscore prefix). Begravelsesbyrå's lived at `.claude/BUILD_PROGRESS.md` (gitignored, local-only — invisible on GitHub, lost on laptop death). Fiskeier and interiørdesigner had no build log at all in obvious places. Bithun went looking in `.claude/` first because that's where begravelsesbyrå's was — and found nothing in bakery there.
+2. **Mismatched naming.** Other prototypes use `_docs/` (with underscore prefix) for agent-internal artifacts (lead research, prospect PDFs, search prompts). Bakery's `docs/` was the odd one out and broke Bithun's "every folder starts with `_` except `demo-*`" pattern.
+3. **Stale documentation.** The Architecture Decision Guide §"Step 4" still mandated `.claude/build-progress.md` (lowercase, gitignored) — the OLD rule that bakery had reversed in its own commit `a233cc8` (because `.claude/` showing in the GitHub file tree violates Bithun's no-AI-tool-names rule). The KICKOFF PROMPTS Rule 3 had been updated today (2026-05-02) but the Decision Guide hadn't.
+
+### Decision agreed with Bithun
+
+After surfacing the three issues + showing the per-prototype audit table, Bithun decided:
+
+1. **One canonical location:** every prototype keeps a single `_docs/BUILD_PROGRESS.md` (uppercase, TRACKED in git). No `.claude/` build logs anywhere.
+2. **`_docs/*` gitignored with one exception** — `_docs/* + !_docs/BUILD_PROGRESS.md` — so agent-internal artifacts (lead research, prospect lists, search prompts, internal decisions) stay off GitHub while the build log itself ships with the repo and is recoverable from any clone. Mirrors the original `.claude/* + !.claude/BUILD_PROGRESS.md` exception bakery had at the very start (commit `19caacc`), now applied to `_docs/`.
+3. **Backfill stubs** for the prototypes that never had a build log (fiskeier, interiørdesigner) so future agents looking for change history land in the same place every time.
+4. **Migrate** the gitignored build logs that DO exist (begravelsesbyrå `.claude/BUILD_PROGRESS.md`, interiørdesigner `.claude/plan/build-progress.md`) into `_docs/` so they become tracked + recoverable.
+5. **Delete duplicates** ruthlessly — exactly one `BUILD_PROGRESS.md` per prototype, only at `_docs/`. After Bithun caught a duplicate-stub mistake on interiørdesigner (the agent created a stub at `_docs/` without first noticing the real 91-line build log already at `.claude/plan/`), the rule became: always filesystem-search for any change-log style file anywhere in the prototype before creating a new one.
+6. **Update both source-of-truth documents** so the next agent doesn't re-encounter the inconsistency: ARCHITECTURE-DECISION-GUIDE.md §"Step 4" + BUSINESS-KICKOFF-PROMPTS.md Rule 3.
+
+### Changes applied in OTHER projects (not Bakery)
+
+| Project | What changed | Commit | Pushed to |
+|---|---|---|---|
+| **begravelsesbyrå** | Migrated `.claude/BUILD_PROGRESS.md` (272 lines) → `_docs/BUILD_PROGRESS.md`. Added `_docs/* + !_docs/BUILD_PROGRESS.md` to `.gitignore`. Updated header to reflect new location. Deleted stale `.claude/` copy after migration. | `1584a67` (migration) + `f07b99d` (gitignore) | `goldenbutter/minnero.begravelsesbyra` `main` |
+| **fiskeier** | Created `_docs/BUILD_PROGRESS.md` stub (no prior build log existed; git log is authoritative source for pre-stub history). Added `_docs/* + !_docs/BUILD_PROGRESS.md` to `.gitignore` plus `_public/` for Nano Banana staging consistency. | `081557a` | `goldenbutter/orklaElveFiskeBooking` `dev` |
+| **interiørdesigner** | First created a stub at `_docs/` (commit `32bf66f`) — Bithun then caught that a real 91-line build log existed at `.claude/plan/build-progress.md` (gitignored). Migrated the full real history into `_docs/BUILD_PROGRESS.md` (commit `d596909`), preserving status table + 4 build sessions of recent activity + repo-state-at-handoff. Added a session-5 entry documenting today's family-wide migration. Deleted `.claude/plan/build-progress.md` after migration. Same `_docs/*` gitignore exception added. | `32bf66f` (stub + gitignore) + `d596909` (real history migration) | `goldenbutter/interior-atelier` `master` |
+| **restaurant** | Edited `.gitignore`: changed `_docs/` (flat ignore) → `_docs/* + !_docs/BUILD_PROGRESS.md` so a future build log lands tracked. **NOT committed** — restaurant has in-flight `style.css` work in both tiers + a `.vscode` line already staged; left for Bithun to bundle. | (uncommitted) | (n/a) |
+| **`_docs/_skill/ARCHITECTURE-DECISION-GUIDE.md`** | §"Step 4" updated: replaced stale `.claude/build-progress.md` (lowercase, gitignored) rule with `_docs/BUILD_PROGRESS.md` (uppercase, TRACKED) + a one-line note pointing at bakery commit `a233cc8` as the reversal. | (local edit; not a git repo at this path) | (n/a) |
+| **`_docs/_prompt/BUSINESS-KICKOFF-PROMPTS.md`** | Rule 3 expanded: added the verbatim `_docs/* + !_docs/BUILD_PROGRESS.md` gitignore block + the verification command + a note that it's locked across the four shipped prototypes. Also rewrote 10 references from `docs/BUILD_PROGRESS.md` → `_docs/BUILD_PROGRESS.md` across the per-business prompts. | (local edit) | (n/a) |
+
+### Verification
+
+After all changes: `find c:/Project/prototypes/{bakery,begravelsesbyrå,fiskeier,interiørdesigner}-demo -iname "BUILD_PROGRESS*"` returns exactly four hits — one per prototype, all at `_docs/BUILD_PROGRESS.md`. No duplicates, no `.claude/` build logs anywhere.
+
+### Lesson recorded
+
+**Before creating any new file, filesystem-search the whole prototype tree for files with similar names.** The interiørdesigner stub mistake came from listing only `.claude/` top level (which showed `plan/` as a folder) without peeking inside. Per-prototype build logs may sit at `.claude/`, `.claude/plan/`, `_docs/`, `docs/`, `notes/`, or any other agent-internal location depending on which session built the prototype. Always run `find <prototype-root> -iname "BUILD_PROGRESS*" -o -iname "build-progress*" -o -iname "CHANGELOG*"` before adding a new one.
+
 ### Future entries
 
 > Template for the next commit log entry — copy and fill in:

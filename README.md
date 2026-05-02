@@ -3,8 +3,10 @@
 A two-tier static website prototype for a fictional Norwegian family bakery in Bergen. Built to demonstrate what a real bakery client site can look like at two price points.
 
 **Live demos:**
-- Classic → [demo-bakeri-classic.vercel.app](https://demo-bakeri-classic.vercel.app)
-- Premium → [demo-bakeri-premium.vercel.app](https://demo-bakeri-premium.vercel.app)
+- Classic → [demo-bakeri-classic.ibithun.com](https://demo-bakeri-classic.ibithun.com)
+- Premium → [demo-bakeri-premium.ibithun.com](https://demo-bakeri-premium.ibithun.com)
+
+> Both sites ship with `<meta name="robots" content="noindex, nofollow">` and a `Disallow: /` `robots.txt`. Demo content should not compete in search results with the eventual real client site.
 
 ---
 
@@ -42,7 +44,8 @@ Vanilla HTML · CSS (custom properties, no framework) · JavaScript (no dependen
 
 - No `npm install`. No build step. Open `index.html` in a browser.
 - Single `css/style.css` + single `js/main.js` per tier
-- Deployed on Vercel (static, zero config)
+- Deployed on Vercel — each tier has a `vercel.json` with 1-year immutable cache for `/assets/*`, 1-day cache for css/js, and security headers (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+- Vercel Web Analytics enabled on both projects
 
 ---
 

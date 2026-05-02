@@ -197,6 +197,57 @@
 - **Gotcha fixed:** IDE linter warned that `rotate()` inside `@keyframes` triggers Paint (not just Composite). Stripped `rotate()` from all keyframe steps — pure `translateY` is GPU-composited only.
 - **How to revert:** `git revert d22c853`. Restores the old gallery saturate hover, old card hover transform, and removes float animation.
 
+### Commit `c2fd7c8` — Review-round-4: parity, polish, animation pause-on-hover
+- **Date:** 2026-05-01
+- **Type:** feat
+- **Files touched:** 16 files across both tiers (HTML, CSS, JS, favicon, .gitignore)
+- **What (CLASSIC):**
+  - Restructured gallery into the same 3 explicit `.gallery-col` wrappers as premium (8 / 7 / 8 split, items distributed by `nth-child` modulo 3 for visual variety). `display: flex` replaces `columns: 3` multi-column.
+  - Added comprehensive `:hover`-killer block at end of CSS — flips menu cards, FAQ buttons, nav links, footer links, buttons, mobile-menu rows, lang-toggle, modal close, and image-scale hovers all back to base appearance. The earlier `* { transition: none }` rule killed *animation* of hover changes; this block kills the *end-state* changes too.
+  - About photo grid: `grid-template-rows: 230px / 230px / 540px`, default `object-position: center 28%` to keep faces in frame, storefront tile uses `object-fit: contain` so the whole 16:9 building shows (slight letterboxing absorbs the source ratio mismatch).
+  - Added 4th category card on the homepage (Kafé & disk → about-photo-2.jpg). Heading changed to "Alt under samme tak". Grid now 4-col desktop / 2-col tablet / 1-col mobile.
+  - Synced inline body copy with the longer premium JS translations: `today1/2/3.text`, `story.p1/p2`, `about.story.p1/p2`, `menu.sour.intro`. Both tiers now read identically in shared sections.
+  - Favicon: rounded cream tile (`#FBF6EC`) wraps the wheat glyph so it's legible on dark browser tabs.
+  - Gallery banner: `bg-focal-right` class added so framing matches premium.
+- **What (PREMIUM):**
+  - Fixed `og:image` URL (was pointing at `demo-bakeri-classic.vercel.app`). Added `og:url`.
+  - Nav hover: replaced underline with per-link colored text-shadow glow. Tones: `#B8842B` (Home) / `#C8704F` (Meny) / `#D4A24A` (Om oss) / `#A8454F` (Galleri) — all warm bakery palette, no cool outliers (replaced the original sage-green that read as out-of-place).
+  - rameezscripts pause-on-hover pattern for all floating cards (`.bake-card`, `.category-card`, `.menu-grid .menu-item`): `:hover { animation-play-state: paused !important; }` PLUS a back-side amber ring (`box-shadow: 0 0 0 2px ...`, 38px blur). Critical detail: the `:hover` rule must come **after** the `:nth-child` float-shorthand rules in source order, otherwise the shorthand resets `animation-play-state` to `running`.
+  - Sourdough timeline: per-icon `step-icon-float` keyframe, 5 different durations (4.0s–5.2s) and delays (0.2s–1.4s) so step icons bob independently from the active-step ring pulse.
+  - Mobile menu redesign: 240px wide (was 320px), `rgba(251,246,236,0.40)` background with `blur(30px) saturate(180%)` backdrop filter, inset highlight on top edge for genuine liquid-glass feel. Tighter padding.
+  - Gallery: restructured into 3 explicit `.gallery-col` wrappers (8 / 7 / 8 split). Each column animates: col 1 drifts down, col 2 up, col 3 down (`gallery-drift-down/up` keyframes, 9 s, staggered delays). `columns: unset` overrides the original multi-column rule. Mobile collapses to single column with animation off.
+  - Added 4th category card (same content as classic — parity).
+  - Fixed `'baker hver kveld natt'` typo in `story.p2` (NO) — now `'baker hver natt'`.
+  - About photo grid: same restructure as classic; storefront tile uses `object-fit: contain` (no crop).
+  - Inline HTML synced with JS translations so SEO crawlers and no-JS users see the rich copy.
+- **Why:** Customer-style review round 4 — long list of cosmetic and parity asks: identical menu/text/colors across tiers, classic must read static, premium gets richer interactions, About-page collage redo, gallery balance, glassier mobile menu, rameezscripts-inspired pause-on-hover pattern.
+- **Gotcha fixed:** Original menu pause-on-hover wasn't working because the `:nth-child` `animation:` shorthand later in the file was resetting `animation-play-state` back to `running`. Solved by reordering source so `:hover` comes after `:nth-child`, plus `!important` for safety.
+- **How to revert:** `git revert c2fd7c8`. Big diff — easier to revert the whole commit than to hand-roll. The classic `:hover`-killer block can be dropped on its own (search for "CLASSIC — KILL ALL :hover STATE CHANGES") to restore classic's old hover-state-without-transitions behaviour.
+
+### Commit `d410981` — Deploy: vercel.json, robots, sitemap, canonical og URLs
+- **Date:** 2026-05-01
+- **Type:** chore
+- **Files touched:** `demo-bakeri-{classic,premium}/{vercel.json,robots.txt,sitemap.xml,index.html}` (8 files)
+- **What:**
+  - `vercel.json` per tier: `/assets/*` → `Cache-Control: public, max-age=31536000, immutable`; `*.css/*.js` → `max-age=86400, must-revalidate`; security headers on all routes (X-Content-Type-Options, X-Frame-Options SAMEORIGIN, Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy locking camera/mic/geolocation, HSTS 1y includeSubDomains).
+  - `robots.txt` per tier: initially `Allow: /` + sitemap pointer (later changed — see next commit).
+  - `sitemap.xml` per tier: 4 URLs (later removed — see next commit).
+  - `og:image` and new `og:url` on both `index.html` files now use the canonical `*.ibithun.com` custom domain instead of the auto-generated `*.vercel.app` preview URL.
+- **Why:** Sites went live on `demo-bakeri-{classic,premium}.ibithun.com`. Vercel doesn't require `vercel.json` for static sites but the custom cache + security headers are deploy hygiene.
+- **How to revert:** `git revert d410981`. Falls back to Vercel's default cache + bare HTTP headers.
+
+### Commit `<pending>` — Demo: noindex / nofollow, drop sitemap
+- **Date:** 2026-05-01
+- **Type:** chore
+- **Files touched:** `demo-bakeri-{classic,premium}/{robots.txt,index.html,menu.html,about.html,gallery.html,404.html}` (12 files), removed `sitemap.xml` from both tiers, `README.md`
+- **What:**
+  - `robots.txt` flipped from `Allow: /` to `Disallow: /` on both tiers — search engines should not crawl demo content.
+  - `<meta name="robots" content="noindex, nofollow" />` added to every HTML page on both tiers (5 × 2 = 10 pages).
+  - Deleted `sitemap.xml` from both tiers (no point listing pages we're telling crawlers to ignore).
+  - README updated: `*.vercel.app` URLs replaced with `*.ibithun.com`; added a note about the noindex stance and Vercel deploy hygiene (cache headers, security headers, analytics).
+- **Why:** User point — demo content shouldn't compete with the real client site in search results, and shouldn't appear in Google when prospects search the customer's actual brand later. Belt-and-suspenders: meta-robots + robots.txt.
+- **How to revert:** `git revert <sha>`. Restores indexability and re-creates the sitemaps.
+
 ### Future entries
 
 > Template for the next commit log entry — copy and fill in:
@@ -217,24 +268,36 @@
 
 ### `demo-bakeri-classic/`
 - 5 HTML pages, single CSS, single JS
+- **Live URL:** https://demo-bakeri-classic.ibithun.com (custom domain via Vercel)
 - **i18n:** NO/EN toggle **disabled** (Norwegian-only baseline) — strings preserved in JS for future upsell
-- **Animations:** **disabled** — fully static. CSS override block at end of style.css nullifies all transitions, hover transforms, fade-up reveals, page fade
+- **Animations:** **disabled** — fully static. CSS override block + dedicated `:hover`-killer block at end of style.css nullify all transitions, hover transforms, hover colour shifts, hover bg fills, fade-up reveals, page fade. Click interactions (FAQ accordion, lightbox, Vipps modal, mobile hamburger) remain functional
 - **Mobile menu:** 240px right-anchored dropdown card, body-font links, drop shadow. No transform animation
 - **Visitor badge:** **commented out** (premium-only feature)
 - **Vipps modal trigger:** "Forhåndsbestill" buttons on each menu item — still works (modal show/hide is dialog interaction, not page animation)
 - **Menu images:** 18 menu items — sour1/2/3 use today-sourdough/hero-bread/cat-sourdough; sour4/5/6 → menu-01-olive-rosemary/menu-02-buckwheat/menu-03-roll (`.jpeg`); past1/2 → today-croissant/cat-pastry; past3/4/5/6 → menu-04-pain-chocolat/menu-05-kanelsnurr/today-cardamom/menu-06-eplekrans (`.jpeg`); cake1 → cat-cake; cake2/3/4/5/6 → menu-07-truffle-cake/menu-08-lemon-pistasj/menu-09-bringebær/menu-10-brownie/menu-11-lemon-tart (`.jpeg`)
-- **Gallery images:** 23 items — img1–12 (original set) + img13–23 (new food shots, all `.jpeg`)
+- **Categories (homepage):** 4 cards — Surdeigsbrød, Bakverk, Kaker, Kafé & disk. Heading: "Alt under samme tak". Grid: 4-col desktop / 2-col tablet / 1-col mobile
+- **Gallery:** 3 explicit `.gallery-col` wrappers (8 / 7 / 8 split, items distributed by `nth-child` modulo 3). Same layout as premium but full colour, no animation
+- **About photo grid:** `230px / 230px / 540px` rows, default `object-position: center 28%` to keep faces visible, storefront tile uses `object-fit: contain` to avoid cropping
 - **Mobile focal point classes:** `.focal-upper` (10%), `.focal-lower` (55%), `.focal-low` (70%), `.focal-right` (65% x), `.bg-focal-right`; applied per-image in HTML. Default `object-position: center 50%`
+- **Deploy:** `vercel.json` with 1y immutable cache for `/assets/*`, 1d for css/js, security headers (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+- **Robots:** `Disallow: /` + `<meta name="robots" content="noindex, nofollow">` on every page (demo-stance, no SEO competition with future real client site)
 - **LOCKED** — no further changes planned for classic tier
 
 ### `demo-bakeri-premium/`
-- Same 5 HTML pages + 3 signature features layered into `index.html`
+- Same 5 HTML pages + signature features layered into `index.html`
+- **Live URL:** https://demo-bakeri-premium.ibithun.com (custom domain via Vercel)
 - **i18n:** NO/EN toggle **active** (premium feature)
-- **Animations:** classic baseline (kept) + croissant bobs, counter count-up, timeline ring-pulse + progress fill, ambient hero video
-- **Mobile menu:** 320px floating glass card with `border-radius: 18px`, anchored top-right with 1rem margin, 88px from top; `height: auto` (compact, ~5 rows). Opens with translateY+scale spring + fade. Backdrop-filter blur preserved
+- **Animations:** classic baseline (kept) + croissant bobs, counter count-up, timeline ring-pulse + progress fill, per-icon timeline float, ambient hero video, gallery column parallax drift
+- **Nav hover:** per-link warm-palette text-shadow glow (no underline). Hjem `#B8842B` → Meny `#C8704F` → Om oss `#D4A24A` → Galleri `#A8454F`
+- **Mobile menu:** 240px liquid-glass floating card (`rgba(251,246,236,0.40)` + `blur(30px) saturate(180%)` backdrop filter), inset top-edge highlight, anchored top-right with 0.85rem margin, 80px from top
 - **Visitor badge:** rendered in footer (premium feature)
 - **Hero video:** `assets/videos/hero-bread.mp4` (loaded with JPG poster fallback)
-- **Menu / gallery / mobile-cropping:** same image set + focal-point classes as classic
-- **Gallery hover effect:** grayscale(100%) default → grayscale(0%) + scale(1.04) on hover; `.active` class toggles on touch (JS); `::after` border highlight `var(--color-accent-light)` on hover/active
-- **Floating cards:** `.bake-card` (Dagens bakst) and `.categories-grid .category-card` (Vårt utvalg) bob continuously with staggered `card-float` keyframe (pure `translateY`, GPU-composite only). `prefers-reduced-motion` fallback included
+- **Categories (homepage):** 4 cards — same as classic + float animation. Pause-on-hover pattern (back-side amber ring, neighbours keep bobbing)
+- **Pause-on-hover pattern (rameezscripts):** applied to `.bake-card`, `.categories-grid .category-card`, `.menu-grid .menu-item` — hover pauses *that* card's float and adds an amber ring (`box-shadow: 0 0 0 2px rgba(184,132,43,0.50), 0 0 38px rgba(225,190,130,0.50), 0 14px 38px rgba(184,132,43,0.22)`). Critical: `:hover` must source-order *after* the `:nth-child` `animation:` shorthand or the shorthand resets `animation-play-state` to running. Uses `!important` for safety.
+- **Menu / mobile-cropping:** same image set + focal-point classes as classic
+- **Gallery:** 3 explicit `.gallery-col` wrappers (8 / 7 / 8 split, identical to classic). Default `filter: grayscale(100%)`. Hover/touch reveals full colour + `scale(1.04)` + `var(--color-accent-light)` border highlight on `::after`. Each column drifts independently — col 1 down 9s, col 2 up 9s 0.4s delay, col 3 down 9s 0.8s delay
+- **About photo grid:** identical to classic (`230 / 230 / 540`, `object-fit: contain` on storefront)
+- **Floating cards:** `.bake-card` (Dagens bakst) — 3 cards, durations 4.2/5.1/3.8s with 0.9/1.0/1.1s delays. `.categories-grid .category-card` (Vårt utvalg) — 4 cards, 4.7/5.5/4.1/5.0s with 1.2/1.4/1.6/1.8s delays. `.menu-grid .menu-item` — 18 cards on a 6-pattern `nth-child(6n+1..6)` cycle, 4.1–5.7s × 0.8–1.8s delays. Pure `translateY`, GPU-composite only. `prefers-reduced-motion` fallback included
+- **Deploy:** identical `vercel.json` config to classic
+- **Robots:** identical noindex/nofollow stance — demo content excluded from search
 - **LOCKED** — no further changes planned for premium tier

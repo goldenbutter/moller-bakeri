@@ -54,9 +54,7 @@ Vanilla HTML · CSS (custom properties, no framework) · JavaScript (no dependen
 ```
 bakeri-demo/
 ├── demo-bakeri-classic/     # Classic tier
-│   ├── assets/
-│   │   ├── images/          # All photos (JPEG/JPG)
-│   │   └── videos/          # hero-bread.mp4 (premium only — copied here for parity)
+│   ├── assets/images/       # All photos (JPEG/JPG)
 │   ├── css/style.css
 │   ├── js/main.js
 │   ├── index.html
@@ -64,21 +62,32 @@ bakeri-demo/
 │   ├── about.html
 │   ├── gallery.html
 │   └── 404.html
-└── demo-bakeri-premium/     # Premium tier (mirrors classic + extensions)
-    └── ...
+└── demo-bakeri-premium/     # Premium tier (classic + signature features)
+    ├── assets/
+    │   ├── images/          # Same set as classic
+    │   └── videos/          # hero-bread.mp4 (premium-only animated hero)
+    └── ... (mirrors classic page set)
 ```
 
 ---
 
 ## Design tokens
 
-| Token | Classic | Premium |
-|---|---|---|
-| Primary | `#6B3F1F` (dark brown) | same |
-| Accent | `#B8842B` (golden crust) | `#E1BE82` (warm sand) |
-| Background | `#FAF7F2` (paper cream) | same |
-| Heading font | Fraunces (optical-size serif) | same |
-| Body font | DM Sans | same |
+| Token | Both tiers |
+|---|---|
+| Background | `#FBF6EC` (paper cream) |
+| Background alt | `#F4E8D0` (warm sand) |
+| Background deep | `#ECDCBC` (deeper sand) |
+| Primary | `#B8842B` (golden crust) |
+| Primary dark | `#8C5F1F` |
+| Accent | `#6B3F1F` (dark chocolate) |
+| Accent light | `#E1BE82` (warm sand highlight) |
+| Text | `#3A2618` |
+| Text light | `#7B5A3F` |
+| Heading font | Fraunces (optical-size serif) |
+| Body font | DM Sans |
+
+Both tiers share the identical palette and font stack — the price-tier divergence is animations, interactivity, and copy depth, not aesthetic.
 
 ---
 
@@ -95,7 +104,7 @@ git diff HEAD^ HEAD --quiet -- demo-bakeri-premium/   # premium project
 
 ## Photography
 
-Placeholder photos are AI-generated (prototype-only). Real customer photos replace all assets at fork time before the site goes live on a custom domain.
+Placeholder photos are generated for prototype use only. Real customer photos replace every asset at fork time before the site goes live on a custom domain. Norwegian Markedsføringsloven and EU disclosure rules around generated imagery in commercial contexts make real photos the only safe default for production.
 
 ---
 

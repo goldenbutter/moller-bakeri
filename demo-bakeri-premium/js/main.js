@@ -220,7 +220,7 @@ const translations = {
     'modal.title': 'Dette er en demo',
     'modal.body1': 'Dette er en demo — Vipps-betaling aktiveres når din konto er satt opp.',
     'modal.body2': 'Kontakt oss for å se hvordan dette fungerer for ditt bakeri:',
-    'modal.email': 'post@bakeridemo.no',
+    'modal.email': 'post@mollerbakeri.no',
     'modal.close': 'Lukk',
 
     // === ABOUT PAGE ===
@@ -537,7 +537,7 @@ const translations = {
     'modal.title': 'This is a demo',
     'modal.body1': 'This is a demo — Vipps payment is activated when your account is set up.',
     'modal.body2': 'Contact us to see how this works for your bakery:',
-    'modal.email': 'post@bakeridemo.no',
+    'modal.email': 'post@mollerbakeri.no',
     'modal.close': 'Close',
 
     // === ABOUT PAGE ===

@@ -5,6 +5,10 @@ screenshot/
 .env*
 node_modules/
 .DS_Store
+Thumbs.db
+
+# Per-prototype Nano Banana staging — original AI exports stay here, never committed
+_public/
 
 # Test/preview artifacts
 .playwright-mcp/

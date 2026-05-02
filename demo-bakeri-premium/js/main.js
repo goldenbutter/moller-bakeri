@@ -39,7 +39,7 @@ const translations = {
 
     // --- Categories preview ---
     'cat.label':   'Vårt utvalg',
-    'cat.heading': 'Tre håndverk under samme tak',
+    'cat.heading': 'Alt under samme tak',
 
     'cat1.title': 'Surdeigsbrød',
     'cat1.text':  'Lange hevinger med vill surdeig. 8 sorter, daglig bakst.',
@@ -53,11 +53,15 @@ const translations = {
     'cat3.text':  'Bestillingskaker, sesongkaker og daglige fristelser.',
     'cat3.link':  'Se kaker',
 
+    'cat4.title': 'Kafé & disk',
+    'cat4.text':  'Sett deg ned med kaffe og morgenbrød. Stille hjørne midt i Bergen.',
+    'cat4.link':  'Besøk oss',
+
     // --- Story home ---
     'story.label':   'Vår historie',
     'story.heading': 'Et bakeri på Marken — siden bestefar Knut åpnet døren',
     'story.p1':      'Møller Bakeri har stått i Skostredet siden 1962, da bestefar Knut Møller flyttet fra Voss til Bergen med en steinmølle, en surdeigsstarter, og en idé om at brød skulle ta tid. Den samme starteren bobler fortsatt i kjelleren — vi har bare matet den i 63 år.',
-    'story.p2':      'I dag driver Anna og Lars videre, med Knuts barnebarn Selma som lærling. Vi maler fortsatt en del av kornet selv, baker hver kveld natt for å ha ferskt klart kl. 07, og kjenner navnene på faste kunder.',
+    'story.p2':      'I dag driver Anna og Lars videre, med Knuts barnebarn Selma som lærling. Vi maler fortsatt en del av kornet selv, baker hver natt for å ha ferskt klart kl. 07, og kjenner navnene på faste kunder.',
     'story.p3':      'Kom inn for kaffe og en croissant — vi spør gjerne hvordan dagen din går.',
     'story.signoff': '– Familien Møller',
     'story.img.alt': 'Anna Møller og Lars Møller bak disken i bakeriet med ferske brød',
@@ -358,7 +362,7 @@ const translations = {
 
     // --- Categories preview ---
     'cat.label':   'Our craft',
-    'cat.heading': 'Three crafts under one roof',
+    'cat.heading': 'Everything under one roof',
 
     'cat1.title': 'Sourdough Bread',
     'cat1.text':  'Long ferments with wild sourdough. 8 varieties, daily.',
@@ -371,6 +375,10 @@ const translations = {
     'cat3.title': 'Cakes',
     'cat3.text':  'Order cakes, seasonal favourites, and daily slices.',
     'cat3.link':  'See cakes',
+
+    'cat4.title': 'Café & counter',
+    'cat4.text':  'Sit down with a coffee and morning bread. A quiet corner in central Bergen.',
+    'cat4.link':  'Visit us',
 
     // --- Story home ---
     'story.label':   'Our story',

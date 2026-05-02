@@ -713,8 +713,8 @@ p { color: var(--color-text); }
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
 }
 
 .category-card {
@@ -1250,7 +1250,7 @@ p { color: var(--color-text); }
 .photo-grid {
   display: grid;
   grid-template-columns: 3fr 2fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: 230px 230px 540px;
   gap: 1rem;
 }
 
@@ -1258,21 +1258,29 @@ p { color: var(--color-text); }
   overflow: hidden;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
+  background: var(--color-bg-alt);
 }
 
 .photo-grid-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 28%;       /* keep heads/faces in frame */
   transition: transform 0.5s ease;
 }
 
 .photo-grid-item:hover img { transform: scale(1.04); }
 
-.photo-grid-item.large { grid-row: 1 / 2; height: 360px; }
-.photo-grid-item.small-top,
-.photo-grid-item.small-bottom { height: 172px; }
-.photo-grid-item.wide { grid-column: 1 / -1; height: 280px; }
+.photo-grid-item.large        { grid-column: 1; grid-row: 1 / 3; }
+.photo-grid-item.small-top    { grid-column: 2; grid-row: 1; }
+.photo-grid-item.small-bottom { grid-column: 2; grid-row: 2; }
+.photo-grid-item.small-bottom img { object-position: center 50%; }   /* mill gear — center fine */
+.photo-grid-item.wide         { grid-column: 1 / -1; grid-row: 3; }
+.photo-grid-item.wide img     {
+  object-fit: contain;             /* show full storefront, no crop */
+  background: var(--color-bg-alt);
+  object-position: center;
+}
 
 .bakers-section {
   padding: 5rem 2rem;
@@ -1384,13 +1392,20 @@ p { color: var(--color-text); }
 }
 
 .gallery-grid {
-  columns: 3;
-  column-gap: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.gallery-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .gallery-item {
-  break-inside: avoid;
-  margin-bottom: 12px;
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
@@ -1553,7 +1568,7 @@ p { color: var(--color-text); }
   .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
 
-  .photo-grid { grid-template-columns: 1fr; }
+  .photo-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
   .photo-grid-item.large,
   .photo-grid-item.small-top,
   .photo-grid-item.small-bottom,
@@ -1566,7 +1581,7 @@ p { color: var(--color-text); }
   .bakers-grid,
   .values-grid { grid-template-columns: 1fr; }
 
-  .gallery-grid { columns: 2; }
+  .gallery-grid { flex-direction: column; gap: 10px; }
 
   .lightbox-prev { left: 0.5rem; }
   .lightbox-next { right: 0.5rem; }
@@ -1574,7 +1589,6 @@ p { color: var(--color-text); }
 
 @media (max-width: 480px) {
   .container { padding: 0 1.25rem; }
-  .gallery-grid { columns: 1; }
   .nav-inner { padding: 0 1.25rem; }
 }
 
@@ -1728,3 +1742,93 @@ p { color: var(--color-text); }
 .focal-right { object-position: 65% 40% !important; }     /* hero-bread.jpg — subject on right    */
 .bg-focal-right { background-position: 65% center !important; } /* banner BGs with right subject */
 
+/* === CLASSIC — KILL ALL :hover STATE CHANGES ===
+   Per spec: classic ships with zero interactive feel. The transition: none
+   override above kills *animation*, but element :hover styles still apply
+   (color shifts, background fills, link yellow-ing, etc). This block flips
+   each hovered element back to its base appearance so nothing changes
+   visually when the cursor passes over it.
+   ----------------------------------------------------------------- */
+
+/* Menu cards — keep base shadow/border, no lift, no glow */
+.menu-item:hover {
+  box-shadow: var(--shadow-card) !important;
+  border-color: var(--color-border) !important;
+  transform: none !important;
+}
+
+/* FAQ — no background fill, no color change, plus icon stays grey */
+.faq-question:hover,
+.faq-question:focus {
+  background: transparent !important;
+  color: var(--color-text) !important;
+}
+.faq-question:hover .faq-icon,
+.faq-question:focus .faq-icon { color: inherit !important; }
+.faq-item:hover { border-color: var(--color-border) !important; }
+
+/* Nav links — no color change, no underline expand */
+.nav-links a:hover,
+.nav-links a.active { color: var(--color-text-light) !important; }
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 0 !important; }
+.nav-logo:hover { color: inherit !important; }
+
+/* Footer + inline links — no yellow on hover */
+.footer a:hover,
+.footer-links a:hover,
+.footer-contact a:hover,
+.footer-bottom a:hover { color: inherit !important; }
+
+/* Text links / arrows — no color change, no gap shift */
+.text-link:hover { color: var(--color-primary) !important; gap: 0.3rem !important; }
+.category-card:hover .category-card-link { gap: 0.35rem !important; }
+
+/* Buttons — keep base appearance on hover */
+.btn-accent:hover {
+  background: var(--color-primary) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.btn-primary:hover {
+  background: var(--color-accent) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.btn-outline:hover {
+  background: transparent !important;
+  color: var(--color-accent) !important;
+  transform: none !important;
+}
+
+/* Lang toggle / hamburger — no hover color change */
+.lang-toggle:hover {
+  color: var(--color-text-light) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* Mobile menu rows — no hover background or color change */
+.mobile-menu a:hover {
+  background: transparent !important;
+  color: var(--color-text) !important;
+}
+
+/* Pre-order trigger inside menu cards — no color change */
+.preorder-link:hover { color: var(--color-accent) !important; }
+
+/* Modal close — no background fill on hover */
+.modal-close-btn:hover {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+/* Photo grid + bake card images — no scale on hover */
+.bake-card-image:hover,
+.photo-grid-item:hover img,
+.menu-item-image:hover,
+.gallery-item:hover img {
+  transform: none !important;
+  filter: none !important;
+}
+
+/* FAQ-item open state still works (it's a click, not hover) */

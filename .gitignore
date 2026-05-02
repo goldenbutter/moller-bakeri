@@ -6,3 +6,8 @@ screenshot/
 .env*
 node_modules/
 .DS_Store
+
+# Test/preview artifacts
+.playwright-mcp/
+*.png
+demo-bakeri-premium/assets/hero-bread..mp4

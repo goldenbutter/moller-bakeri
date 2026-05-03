@@ -1554,11 +1554,20 @@ p { color: var(--color-text); }
 
   .hero { height: 70vh; }
   .hero-bg { background-position: 65% 50%; }
-  .hero-content { padding: 0.75rem 2rem 2rem; }
-  .hero-eyebrow { margin-bottom: 14rem; }
+  /* Mobile hero layout: eyebrow pinned to top (below nav), rest pinned to bottom.
+     Stable across iOS Safari/Chrome where 100vh varies with the URL bar. */
+  .hero { align-items: stretch; }
+  .hero-content {
+    padding: 1rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hero-eyebrow { margin-bottom: 0; align-self: flex-start; }
   .hero-content h1 {
     font-size: clamp(1.8rem, 7vw, 2.4rem);
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+    margin-top: auto;
   }
   .hero-content p { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55); }
   .hero-overlay { background: linear-gradient(to top, rgba(58, 38, 24, 0.92) 0%, rgba(58, 38, 24, 0.70) 35%, rgba(58, 38, 24, 0.20) 70%, rgba(58, 38, 24, 0.05) 100%); }

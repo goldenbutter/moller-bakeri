@@ -10,10 +10,9 @@ Thumbs.db
 # Per-prototype Nano Banana staging — original AI exports stay here, never committed
 _public/
 
-# Agent-internal artifacts (lead research, prospect lists, search prompts, decisions)
-# Exception: BUILD_PROGRESS.md is the project's tracked change log — keep visible on GitHub
-_docs/*
-!_docs/BUILD_PROGRESS.md
+# Agent-internal artifacts (lead research, prospect lists, search prompts, decisions, BUILD_PROGRESS log)
+# Fully ignored — BUILD_PROGRESS.md is for the agent that forks this prototype, not for GitHub
+_docs/
 
 # Test/preview artifacts
 .playwright-mcp/

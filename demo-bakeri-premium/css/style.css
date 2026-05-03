@@ -2118,7 +2118,8 @@ p { color: var(--color-text); }
 
 /* Pause-on-hover for Dagens bakst — same pattern as menu cards.
    Placed AFTER the :nth-child rules so the cascade wins. */
-.bake-card:hover {
+.bake-card:hover,
+.bake-card.is-tapped {
   animation-play-state: paused !important;
   box-shadow: 0 0 0 2px rgba(184, 132, 43, 0.50),
               0 0 38px rgba(225, 190, 130, 0.50),
@@ -2136,7 +2137,8 @@ p { color: var(--color-text); }
 /* Pause-on-hover for Vårt utvalg — same pattern. The back-side ring
    sits outside the card's overflow:hidden because box-shadow paints
    on the outer box, not inner content. */
-.categories-grid .category-card:hover {
+.categories-grid .category-card:hover,
+.categories-grid .category-card.is-tapped {
   animation-play-state: paused !important;
   box-shadow: 0 0 0 2px rgba(184, 132, 43, 0.50),
               0 0 38px rgba(225, 190, 130, 0.50),
@@ -2164,7 +2166,8 @@ p { color: var(--color-text); }
 .menu-grid .menu-item:nth-child(6n+5) { animation: card-float 4.4s ease-in-out 1.6s infinite; }
 .menu-grid .menu-item:nth-child(6n+6) { animation: card-float 5.0s ease-in-out 1.8s infinite; }
 
-.menu-grid .menu-item:hover {
+.menu-grid .menu-item:hover,
+.menu-grid .menu-item.is-tapped {
   animation-play-state: paused !important;
   border-color: var(--color-accent-light);
   box-shadow: 0 0 0 2px rgba(184, 132, 43, 0.50),

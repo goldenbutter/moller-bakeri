@@ -995,13 +995,13 @@ function initHeroWordFlip() {
 
   let swapEl = tagSwapWord();
   let swapTimer = null;
-  let swapStopped = false;
+  let isPaused = false;
   let swapOriginal = swapEl ? swapEl.textContent : null;
   let swapShowingAlt = false;
   let swapGen = 0;
 
   const startSwapLoop = () => {
-    if (swapStopped || !swapEl) return;
+    if (isPaused || !swapEl) return;
     if (swapTimer) clearTimeout(swapTimer);
     const FLIP_MS = 320;
     swapEl.style.transition = `transform ${FLIP_MS}ms linear`;
@@ -1009,7 +1009,7 @@ function initHeroWordFlip() {
     swapEl.style.opacity = '1';
     const myGen = swapGen;
     const tick = () => {
-      if (swapStopped || swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
+      if (isPaused || swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
       const altA = (translations[currentLang] && translations[currentLang]['hero.swap.a']) || swapOriginal;
       const altB = (translations[currentLang] && translations[currentLang]['hero.swap.b']) || swapOriginal;
       swapShowingAlt = !swapShowingAlt;
@@ -1017,7 +1017,7 @@ function initHeroWordFlip() {
       swapEl.style.transition = `transform ${FLIP_MS}ms linear`;
       swapEl.style.transform = 'rotateY(90deg)';
       setTimeout(() => {
-        if (swapStopped || swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
+        if (isPaused || swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
         swapEl.style.transition = 'none';
         swapEl.textContent = next;
         swapEl.style.transform = 'rotateY(-90deg)';
@@ -1031,7 +1031,7 @@ function initHeroWordFlip() {
   };
 
   window.__heroSwapRearm = () => {
-    if (swapStopped) return;
+    if (isPaused) return;
     swapGen++;
     if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
     swapEl = tagSwapWord();
@@ -1041,18 +1041,48 @@ function initHeroWordFlip() {
     startSwapLoop();
   };
 
-  if (swapEl) setTimeout(() => { if (!swapStopped) startSwapLoop(); }, 2200);
+  if (swapEl) setTimeout(() => { if (!isPaused) startSwapLoop(); }, 2200);
 
+  // Pause the loop while user has scrolled past the hero; resume when back.
+  // Lock to the original word during the paused phase so the headline reads as-typed.
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 60 && !swapStopped) {
-      swapStopped = true;
-      if (swapTimer) clearTimeout(swapTimer);
+    const past = window.scrollY > 60;
+    if (past && !isPaused) {
+      isPaused = true;
+      if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
       if (swapEl && swapOriginal) {
         swapEl.style.transition = 'transform 0.25s ease-out';
         swapEl.style.transform = 'rotateY(0deg)';
         swapEl.textContent = swapOriginal;
       }
+    } else if (!past && isPaused) {
+      isPaused = false;
+      // Bump generation so any lingering callbacks are invalidated, then restart.
+      swapGen++;
+      startSwapLoop();
     }
+  }, { passive: true });
+}
+
+// === TAP-TO-PAUSE for floating cards (iOS Safari hover fallback) ===
+// Mobile Safari fires :hover unreliably and leaves sticky states. Tapping a
+// floating card toggles .is-tapped for 1.4s — same CSS as :hover (paused
+// animation + amber edge ring). Tap another card to swap focus.
+function initCardTapHover() {
+  const selector = '.bake-card, .categories-grid .category-card, .menu-grid .menu-item';
+  let activeEl = null;
+  let activeTimer = null;
+  document.addEventListener('touchstart', (e) => {
+    const card = e.target.closest(selector);
+    if (!card) return;
+    if (activeTimer) clearTimeout(activeTimer);
+    if (activeEl && activeEl !== card) activeEl.classList.remove('is-tapped');
+    card.classList.add('is-tapped');
+    activeEl = card;
+    activeTimer = setTimeout(() => {
+      card.classList.remove('is-tapped');
+      if (activeEl === card) activeEl = null;
+    }, 1400);
   }, { passive: true });
 }
 
@@ -1068,6 +1098,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBakeCounter();
   initTimeline();
   initHeroWordFlip();
+  initCardTapHover();
 
   document.querySelector('main')?.classList.add('page-fade');
 });

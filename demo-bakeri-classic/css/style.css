@@ -315,9 +315,11 @@ p { color: var(--color-text); }
   color: var(--color-accent-light);
   margin-bottom: 1rem;
   padding: 0.45rem 0.9rem;
-  border: 1px solid rgba(225, 190, 130, 0.4);
+  background: rgba(40, 25, 15, 0.72);
+  border: 1px solid rgba(225, 190, 130, 0.55);
   border-radius: 999px;
-  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .hero-content h1 {
@@ -333,6 +335,7 @@ p { color: var(--color-text); }
   font-style: italic;
   color: var(--color-accent-light);
   font-family: var(--font-heading);
+  display: block;
 }
 
 .hero-content p {
@@ -1277,9 +1280,8 @@ p { color: var(--color-text); }
 .photo-grid-item.small-bottom img { object-position: center 50%; }   /* mill gear — center fine */
 .photo-grid-item.wide         { grid-column: 1 / -1; grid-row: 3; }
 .photo-grid-item.wide img     {
-  object-fit: contain;             /* show full storefront, no crop */
-  background: var(--color-bg-alt);
-  object-position: center;
+  object-fit: cover;
+  object-position: center 50%;
 }
 
 .bakers-section {
@@ -1552,7 +1554,14 @@ p { color: var(--color-text); }
 
   .hero { height: 70vh; }
   .hero-bg { background-position: 65% 50%; }
-  .hero-content h1 { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .hero-content { padding: 0.75rem 2rem 2rem; }
+  .hero-eyebrow { margin-bottom: 14rem; }
+  .hero-content h1 {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  }
+  .hero-content p { text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55); }
+  .hero-overlay { background: linear-gradient(to top, rgba(58, 38, 24, 0.92) 0%, rgba(58, 38, 24, 0.70) 35%, rgba(58, 38, 24, 0.20) 70%, rgba(58, 38, 24, 0.05) 100%); }
 
   .story-home-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .story-home-image img { height: 300px; }

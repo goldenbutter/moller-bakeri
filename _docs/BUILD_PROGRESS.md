@@ -361,6 +361,21 @@ After all changes: `find c:/Project/prototypes/{bakery,begravelsesbyrå,fiskeier
 > - **How to revert:** `git revert <sha>` (or specific lines if hand-revert is preferred)
 > ```
 
+### Commit `<pending>` — Sub-600 KB OG variants for WhatsApp link previews
+- **Date:** 2026-05-03
+- **Type:** fix
+- **Files touched:**
+  - **8 new image files** (4 per tier): `demo-bakeri-{classic,premium}/assets/images/og-{preview,about,gallery,menu}.jpg` — each 1200×630, 85–116 KB (well under WhatsApp's ~600 KB OG limit)
+  - **10 HTML files** (5 pages × 2 tiers): `index.html`, `about.html`, `menu.html`, `gallery.html`, `404.html` in both tier folders. In each: `og:image` URL swapped from the heavy in-page banner JPG (732–937 KB `hero-bread.jpg` / `banner-{about,gallery,menu}.jpg`) to the lightweight `og-*.jpg` variant; added `og:image:width 1200`, `og:image:height 630`, per-page `og:image:alt`, and matching `twitter:image` (was previously inheriting from `og:image` only)
+  - 404 reuses `og-preview.jpg` (same source as index)
+- **What:**
+  - Generated 4 OG variants per tier with ffmpeg (`scale=1200:630:force_original_aspect_ratio=increase,crop=1200:630 -q:v 5`). Source files (`hero-bread.jpg`, `banner-about.jpg`, `banner-gallery.jpg`, `banner-menu.jpg`) kept untouched — they're still used in-page at full quality
+  - Updated `og:image` + added `og:image:width/height/alt` + added `twitter:image` across all 10 HTML files
+- **Why:** sibling project `bilverksted-demo` discovered (via opengraph.xyz) that WhatsApp silently drops link previews to text-only when the OG image exceeds ~600 KB. Facebook / Twitter / LinkedIn / Discord all accept multi-MB images, which is why their previews worked while WhatsApp's didn't. Bakery's OG images were 732–937 KB — same root cause. Fix mirrors `bilverksted-demo` commit `e6a6913`.
+- **Diagnostic that exposed it:** opengraph.xyz reports per-platform size limits. Facebook's debugger does not.
+- **What this fix does NOT change:** the original in-page hero/banner JPGs are untouched (still used as page heroes), Vercel deployment protection (independent setting), `robots.txt` (`Disallow: /` is the demo stance), or any visual rendering of the actual pages.
+- **How to revert:** `git revert <sha>`. Or hand-revert: delete the 8 `og-*.jpg` files and restore `og:image` content URLs in the 10 HTML files back to the original `hero-bread.jpg` / `banner-*.jpg` paths (and remove the new `og:image:width/height/alt` + `twitter:image` lines).
+
 ---
 
 ## Current state of each tier

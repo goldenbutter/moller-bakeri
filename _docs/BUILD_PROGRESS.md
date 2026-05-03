@@ -361,7 +361,7 @@ After all changes: `find c:/Project/prototypes/{bakery,begravelsesbyrå,fiskeier
 > - **How to revert:** `git revert <sha>` (or specific lines if hand-revert is preferred)
 > ```
 
-### Commit `<pending>` — Sub-600 KB OG variants for WhatsApp link previews
+### Commit `dc688d7` — Sub-600 KB OG variants for WhatsApp link previews
 - **Date:** 2026-05-03
 - **Type:** fix
 - **Files touched:**

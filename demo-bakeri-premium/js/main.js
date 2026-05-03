@@ -1,3 +1,4 @@
+// build-tag: 2026-05-03 — sub-600 KB OG variants live (see _docs/BUILD_PROGRESS.md commit dc688d7)
 // === TRANSLATIONS ===
 const translations = {
   no: {

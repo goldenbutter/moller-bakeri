@@ -1280,9 +1280,8 @@ p { color: var(--color-text); }
 .photo-grid-item.small-bottom img { object-position: center 50%; }   /* mill gear — center fine */
 .photo-grid-item.wide         { grid-column: 1 / -1; grid-row: 3; }
 .photo-grid-item.wide img     {
-  object-fit: contain;             /* show full storefront, no crop */
-  background: var(--color-bg-alt);
-  object-position: center;
+  object-fit: cover;
+  object-position: center 50%;
 }
 
 .bakers-section {

@@ -13,6 +13,8 @@ const translations = {
     // --- Hero ---
     'hero.eyebrow':  'Familiebakeri i Bergen siden 1962',
     'hero.headline': 'Surdeigsbrød og bakverk, <em>bakt med tid</em>',
+    'hero.swap.a':   'tid',
+    'hero.swap.b':   'sjel',
     'hero.sub':      'Tre generasjoner i samme bakeri. Lange hevinger, ekte smør, og en duft som vekker hele Marken hver morgen.',
     'hero.cta':      'Se dagens bakst',
     'hero.img.alt':  'Ferskt surdeigsbrød på melstrødd treplate i bakeri',
@@ -336,6 +338,8 @@ const translations = {
     // --- Hero ---
     'hero.eyebrow':  'Family bakery in Bergen since 1962',
     'hero.headline': 'Sourdough and pastries, <em>baked with time</em>',
+    'hero.swap.a':   'time',
+    'hero.swap.b':   'soul',
     'hero.sub':      'Three generations in the same bakery. Long ferments, real butter, and a smell that wakes all of Marken every morning.',
     'hero.cta':      "See today's bake",
     'hero.img.alt':  'Fresh sourdough bread on a flour-dusted wooden board in a bakery',
@@ -680,6 +684,8 @@ function toggleLanguage() {
   currentLang = currentLang === 'no' ? 'en' : 'no';
   localStorage.setItem('moller-lang', currentLang);
   applyTranslations();
+  // Headline innerHTML was rewritten — re-bind the word-swap loop to the new DOM.
+  if (typeof window.__heroSwapRearm === 'function') window.__heroSwapRearm();
 }
 
 function initLangToggle() {
@@ -958,6 +964,98 @@ function initTimeline() {
   if (nowEl) nowEl.textContent = t(`tl${activeIndex + 1}.title`);
 }
 
+// === HERO WORD FLIP (mobile only) ===
+// Wraps the LAST word inside the headline's <em> in a span and flips it on a 2s loop:
+// tid ⇄ sjel (NO) / time ⇄ soul (EN). 3D rotateY card-flip, linear easing both halves.
+// Stops permanently on first real scroll (>60px). Re-binds on language toggle via
+// window.__heroSwapRearm() because applyTranslations() rewrites the headline innerHTML.
+function initHeroWordFlip() {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduced.matches) return;
+
+  // Tag the last word inside the headline's <em> as the swappable span.
+  const tagSwapWord = () => {
+    const headline = document.querySelector('.hero-content h1');
+    if (!headline) return null;
+    const em = headline.querySelector('em');
+    if (!em) return null;
+    // Reset: the headline was just rewritten by applyTranslations, so em.textContent is plain text.
+    const text = em.textContent;
+    const lastSpace = text.lastIndexOf(' ');
+    if (lastSpace < 0) {
+      // Single-word em — wrap the whole thing.
+      em.innerHTML = `<span class="hero-word--swap">${text}</span>`;
+    } else {
+      const before = text.slice(0, lastSpace + 1);
+      const last = text.slice(lastSpace + 1);
+      em.innerHTML = `${before}<span class="hero-word--swap">${last}</span>`;
+    }
+    return document.querySelector('.hero-word--swap');
+  };
+
+  let swapEl = tagSwapWord();
+  let swapTimer = null;
+  let swapStopped = false;
+  let swapOriginal = swapEl ? swapEl.textContent : null;
+  let swapShowingAlt = false;
+  let swapGen = 0;
+
+  const startSwapLoop = () => {
+    if (swapStopped || !swapEl) return;
+    if (swapTimer) clearTimeout(swapTimer);
+    const FLIP_MS = 320;
+    swapEl.style.transition = `transform ${FLIP_MS}ms linear`;
+    swapEl.style.transform = 'rotateY(0deg)';
+    swapEl.style.opacity = '1';
+    const myGen = swapGen;
+    const tick = () => {
+      if (swapStopped || swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
+      const altA = (translations[currentLang] && translations[currentLang]['hero.swap.a']) || swapOriginal;
+      const altB = (translations[currentLang] && translations[currentLang]['hero.swap.b']) || swapOriginal;
+      swapShowingAlt = !swapShowingAlt;
+      const next = swapShowingAlt ? altB : altA;
+      swapEl.style.transition = `transform ${FLIP_MS}ms linear`;
+      swapEl.style.transform = 'rotateY(90deg)';
+      setTimeout(() => {
+        if (swapStopped || swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
+        swapEl.style.transition = 'none';
+        swapEl.textContent = next;
+        swapEl.style.transform = 'rotateY(-90deg)';
+        void swapEl.offsetWidth;
+        swapEl.style.transition = `transform ${FLIP_MS}ms linear`;
+        swapEl.style.transform = 'rotateY(0deg)';
+      }, FLIP_MS + 5);
+      swapTimer = setTimeout(tick, 2000);
+    };
+    swapTimer = setTimeout(tick, 2000);
+  };
+
+  window.__heroSwapRearm = () => {
+    if (swapStopped) return;
+    swapGen++;
+    if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
+    swapEl = tagSwapWord();
+    if (!swapEl) return;
+    swapOriginal = swapEl.textContent;
+    swapShowingAlt = false;
+    startSwapLoop();
+  };
+
+  if (swapEl) setTimeout(() => { if (!swapStopped) startSwapLoop(); }, 2200);
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60 && !swapStopped) {
+      swapStopped = true;
+      if (swapTimer) clearTimeout(swapTimer);
+      if (swapEl && swapOriginal) {
+        swapEl.style.transition = 'transform 0.25s ease-out';
+        swapEl.style.transform = 'rotateY(0deg)';
+        swapEl.textContent = swapOriginal;
+      }
+    }
+  }, { passive: true });
+}
+
 // === INIT ===
 document.addEventListener('DOMContentLoaded', () => {
   applyTranslations();
@@ -969,6 +1067,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGallery();
   initBakeCounter();
   initTimeline();
+  initHeroWordFlip();
 
   document.querySelector('main')?.classList.add('page-fade');
 });

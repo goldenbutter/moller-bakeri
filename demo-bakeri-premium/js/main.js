@@ -995,13 +995,18 @@ function initHeroWordFlip() {
 
   let swapEl = tagSwapWord();
   let swapTimer = null;
-  let isPaused = false;
   let swapOriginal = swapEl ? swapEl.textContent : null;
   let swapShowingAlt = false;
   let swapGen = 0;
 
+  // The loop runs forever. Each tick checks scrollY directly — flips while at
+  // top of hero, snaps to the original word and skips the flip while scrolled
+  // past. No scroll event listener (mobile Safari fires those unreliably during
+  // momentum scrolling); just polled state per tick.
+  const SCROLL_PAUSE_PX = 60;
+
   const startSwapLoop = () => {
-    if (isPaused || !swapEl) return;
+    if (!swapEl) return;
     if (swapTimer) clearTimeout(swapTimer);
     const FLIP_MS = 320;
     swapEl.style.transition = `transform ${FLIP_MS}ms linear`;
@@ -1009,7 +1014,18 @@ function initHeroWordFlip() {
     swapEl.style.opacity = '1';
     const myGen = swapGen;
     const tick = () => {
-      if (isPaused || swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
+      if (swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
+      // While user has scrolled past hero, hold original word and try again next tick.
+      if (window.scrollY > SCROLL_PAUSE_PX) {
+        if (swapEl.textContent !== swapOriginal || swapShowingAlt) {
+          swapEl.style.transition = 'transform 0.25s ease-out';
+          swapEl.style.transform = 'rotateY(0deg)';
+          swapEl.textContent = swapOriginal;
+          swapShowingAlt = false;
+        }
+        swapTimer = setTimeout(tick, 800);
+        return;
+      }
       const altA = (translations[currentLang] && translations[currentLang]['hero.swap.a']) || swapOriginal;
       const altB = (translations[currentLang] && translations[currentLang]['hero.swap.b']) || swapOriginal;
       swapShowingAlt = !swapShowingAlt;
@@ -1017,7 +1033,7 @@ function initHeroWordFlip() {
       swapEl.style.transition = `transform ${FLIP_MS}ms linear`;
       swapEl.style.transform = 'rotateY(90deg)';
       setTimeout(() => {
-        if (isPaused || swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
+        if (swapGen !== myGen || !swapEl || !document.body.contains(swapEl)) return;
         swapEl.style.transition = 'none';
         swapEl.textContent = next;
         swapEl.style.transform = 'rotateY(-90deg)';
@@ -1031,7 +1047,6 @@ function initHeroWordFlip() {
   };
 
   window.__heroSwapRearm = () => {
-    if (isPaused) return;
     swapGen++;
     if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
     swapEl = tagSwapWord();
@@ -1041,27 +1056,7 @@ function initHeroWordFlip() {
     startSwapLoop();
   };
 
-  if (swapEl) setTimeout(() => { if (!isPaused) startSwapLoop(); }, 2200);
-
-  // Pause the loop while user has scrolled past the hero; resume when back.
-  // Lock to the original word during the paused phase so the headline reads as-typed.
-  window.addEventListener('scroll', () => {
-    const past = window.scrollY > 60;
-    if (past && !isPaused) {
-      isPaused = true;
-      if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
-      if (swapEl && swapOriginal) {
-        swapEl.style.transition = 'transform 0.25s ease-out';
-        swapEl.style.transform = 'rotateY(0deg)';
-        swapEl.textContent = swapOriginal;
-      }
-    } else if (!past && isPaused) {
-      isPaused = false;
-      // Bump generation so any lingering callbacks are invalidated, then restart.
-      swapGen++;
-      startSwapLoop();
-    }
-  }, { passive: true });
+  if (swapEl) setTimeout(() => startSwapLoop(), 2200);
 }
 
 // === TAP-TO-PAUSE for floating cards (iOS Safari hover fallback) ===

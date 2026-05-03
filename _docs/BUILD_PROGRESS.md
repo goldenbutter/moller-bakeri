@@ -376,6 +376,64 @@ After all changes: `find c:/Project/prototypes/{bakery,begravelsesbyrå,fiskeier
 - **What this fix does NOT change:** the original in-page hero/banner JPGs are untouched (still used as page heroes), Vercel deployment protection (independent setting), `robots.txt` (`Disallow: /` is the demo stance), or any visual rendering of the actual pages.
 - **How to revert:** `git revert <sha>`. Or hand-revert: delete the 8 `og-*.jpg` files and restore `og:image` content URLs in the 10 HTML files back to the original `hero-bread.jpg` / `banner-*.jpg` paths (and remove the new `og:image:width/height/alt` + `twitter:image` lines).
 
+### Commits `114bafe` + `157d867` — Empty "nudge" commits (NEVER deployed; both CANCELED by Vercel)
+- **Date:** 2026-05-03
+- **Type:** chore (non-functional — kept as historical record)
+- **Files touched:** none (`git commit --allow-empty`)
+- **What:** Two empty commits attempted to force Vercel to redeploy the OG fix from `dc688d7` after noticing the live site still served the old (>600 KB) `og:image`. Both got `state: CANCELED` on Vercel (1-second build).
+- **Why this didn't work — the gotcha:** Vercel's Ignored Build Step (`git diff HEAD^ HEAD --quiet ./`) only evaluates the diff between the **head commit** of the push and its parent. An empty commit produces an empty diff in every project's Root Directory → exit code 0 → Vercel reports `CANCELED` (its label for "Ignored Build Step said skip"). Same story for `f2885d9` (the SHA-backfill commit pushed alongside `dc688d7`): its diff is `_docs/`-only, so both project roots saw an empty diff.
+- **The nasty consequence:** because `dc688d7` (the real fix) was followed in the same push by `f2885d9` (docs-only), Vercel never evaluated `dc688d7` itself — it only evaluated the head `f2885d9`, which had no project-root changes, so **the OG fix sat in the repo for ~12 minutes without ever being deployed.**
+- **How to revert:** N/A — empty commits, no content effect. Left in history because the commit messages document the diagnosis.
+
+### Commit `f51c0e8` — Build-tag both tier `main.js` to defeat Vercel ignored-build-step skip (deploys the OG fix)
+- **Date:** 2026-05-03
+- **Type:** chore
+- **Files touched:**
+  - `demo-bakeri-classic/js/main.js` — single-line comment prepended: `// build-tag: 2026-05-03 — sub-600 KB OG variants live (see _docs/BUILD_PROGRESS.md commit dc688d7)`
+  - `demo-bakeri-premium/js/main.js` — same comment prepended above the `// === TRANSLATIONS ===` line
+- **What:** Added a tracked-file change inside both tier root dirs so the Ignored Build Step's `git diff HEAD^ HEAD --quiet ./` returns non-zero for both projects. This forces Vercel to actually run the production build, which ships the entire HEAD tree — including the queued OG assets and meta tags from `dc688d7`.
+- **Verification:** Vercel deployments `dpl_FnY2gbhE9nAe7ERwDAYYrsnsQHZj` (classic) and `dpl_8TTPfS2Lnt4KHKsJ5DfYJ6TyUzTL` (premium) both reached `state: READY` on production for SHA `f51c0e8` at 2026-05-03 09:46 UTC.
+- **Why:** the empty nudges in `114bafe` + `157d867` got CANCELED because of the multi-commit-push gotcha (see entry above). The build-tag comment is the minimal real-content change that produces a non-empty diff inside each project's Root Directory.
+- **How to revert:** `git revert f51c0e8`. The comment is purely informational; removing it has no functional effect on either tier.
+
+### Reference: Vercel Ignored Build Step gotcha (read before pushing multi-commit batches)
+
+> **Other prototype agents reading this:** the lesson below applies to **every** prototype in `C:\Project\prototypes\*-demo\` because they all share the same `git diff HEAD^ HEAD --quiet ./` Ignored Build Step pattern (set per project's Vercel Settings → Git). Read this before pushing a batch of commits, or you'll burn 30+ minutes diagnosing why the live site doesn't update.
+
+**The gotcha — how Vercel decides whether to skip a build for a monorepo project:**
+
+When you push N commits at once, GitHub fires **one** webhook to Vercel for the head SHA only. Vercel then runs the Ignored Build Step *once*, against the head's diff:
+```
+git diff HEAD^ HEAD --quiet ./
+```
+This evaluates the diff between **only** the head commit and its immediate parent — *not* the full push range. If the head commit happens to touch only files outside the project's Root Directory (e.g. `_docs/`, `README.md`, an empty commit, a sibling tier), the diff in `./` is empty, the command returns exit code 0, and Vercel marks the deployment `CANCELED` after a 1-second build.
+
+**Symptom:** every recent deployment in the project's Vercel dashboard shows `state: CANCELED` with a `~1 second` build duration, even though the GitHub commit clearly contains real changes earlier in the push history. The live site stays on the previous successful (`READY`) deployment.
+
+**Three ways to avoid it:**
+
+1. **Push real-content commits alone first.** Bundle docs/log commits in a *separate, later* push so the head of each push is always a real-content commit for at least one project root.
+2. **When you do bundle docs after real changes, append a no-op real-content tweak to bring the head's diff out of empty.** A single-line comment in `js/main.js` or `css/style.css` inside each affected tier root works (see `f51c0e8` for the canonical example). This is what the bakery did to recover.
+3. **Change the Ignored Build Step on every Vercel project to a more robust formulation** — Vercel's recommended one is:
+   ```
+   git diff $VERCEL_GIT_PREVIOUS_SHA HEAD --quiet ./
+   ```
+   This compares against the *last successfully-deployed* SHA on this project (not just HEAD^), so the diff captures every change since the last build, not just the head commit's diff. Set in: Vercel project → Settings → Git → Ignored Build Step. (Family-wide rollout TBD — would prevent this class of bug for all 24 prototype projects.)
+
+**Three ways to recover after it has already happened (live site stuck on old deployment):**
+
+- **Cleanest (what the bakery did):** add a real-content one-line comment to a tracked file inside each affected tier's root, commit, push. The next webhook fires with a non-empty diff, Vercel builds, ships everything queued since the last `READY`. See `f51c0e8`.
+- **Alternative — manual redeploy from dashboard:** Vercel project → Deployments → find the last `READY` deployment → "Redeploy" with "Use existing build cache" *unchecked*. Note: this redeploys *that specific commit's tree*, not the latest HEAD. So if there are queued changes after that `READY` SHA, this won't deploy them — only the cleanest fix above does.
+- **Don't bother with empty `git commit --allow-empty` "nudges" — they will also be CANCELED for the same reason.** See `114bafe` + `157d867` for the wreckage.
+
+**Diagnostic command** (run when a deploy "didn't trigger"):
+```bash
+# Confirm the commit actually reached origin
+git log --oneline origin/main..HEAD       # should print nothing if push succeeded
+git log --oneline -5 origin/main          # what's actually on the remote
+# Then check Vercel: any deployment with build duration ~1 second + state CANCELED = ignored-build-step skip, not a real cancel
+```
+
 ---
 
 ## Current state of each tier

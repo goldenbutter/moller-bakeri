@@ -1,4 +1,4 @@
-// build-tag: 2026-05-03 — sub-600 KB OG variants live (see _docs/BUILD_PROGRESS.md commit dc688d7)
+// build-tag: 2026-05-03 — sub-600 KB OG variants live + ignored-build-step gotcha documented (see _docs/BUILD_PROGRESS.md commits dc688d7, f51c0e8)
 // === TRANSLATIONS ===
 const translations = {
   no: {

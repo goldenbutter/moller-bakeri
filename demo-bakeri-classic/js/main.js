@@ -1,4 +1,4 @@
-// build-tag: 2026-05-03 — sub-600 KB OG variants live (see _docs/BUILD_PROGRESS.md commit dc688d7)
+// build-tag: 2026-05-03 — sub-600 KB OG variants live + ignored-build-step gotcha documented (see _docs/BUILD_PROGRESS.md commits dc688d7, f51c0e8)
 /* CLASSIC: i18n system disabled per spec — Norwegian-only baseline.
    The HTML carries the Norwegian copy statically, so removing the
    translation runtime simply leaves the static markup in place.
